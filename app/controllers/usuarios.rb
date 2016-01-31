@@ -1,4 +1,4 @@
-require 'rack'
+
 
 FitnessTimeApi::App.controllers :usuarios do
 
@@ -10,22 +10,23 @@ FitnessTimeApi::App.controllers :usuarios do
     usuario.peso = params[:peso]
     usuario.email = params[:email]
     if usuario.save
-      [200,{'content-Type'=>'text/plain'}, true]
+      Response.get_sucsses()
     else
-      [200,{'content-Type'=>'text/plain'}, false]
+      Response.get_error()
     end
   end
 
-  get :autenticar, :map => '/autenticar/:email/:pass' do
+  get :autenticar, :map => '/autenticar' do
     usuario = Usuario.authenticate(params[:email], params[:pass])
     
     if usuario==nil
       #headers['X-Forwarded-For'] = request['X-Forwarded-For']
-      securityToken = SecurityToken.new(0,"","","")
+      securityToken = SecurityToken.new(0,params[:email],"","")
       Response.get_error_response(securityToken.to_json)      
     else
       range = Array.new(25){[*"A".."Z", *"0".."9", *"a".."z"].sample}.join
       securityToken = SecurityToken.new(usuario.id,usuario.nombre,usuario.email,range)
+      securityToken.save
       Response.get_sucsses_response(securityToken.to_json,{'content-Type'=>'text/plain'})
     end
   end
