@@ -5,8 +5,8 @@ API-Rest Fitness Time
 
 autenticar:
 
-	http:/host:port/autenticar?email=:email&pass=:pass
+	http:/api-fitnesstime.herokuapp.com/autenticar?email=:email&pass=:pass
 
 registrar
 
-	http:/host:port/registrar?email=:email&pass=:pass&nombre=:nombre&fecha=:fecha&peso=:peso
+	http://api-fitnesstime.herokuapp.com/registrar?email=:email&pass=:pass&nombre=:nombre&fecha=:fecha&peso=:peso
