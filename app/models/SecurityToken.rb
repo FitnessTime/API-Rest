@@ -19,13 +19,12 @@ class SecurityToken
 
 	def to_json(*a)
 	    {
-	      "json_class"   => self.class.name,
-	      "data"         => {'idUsuario'=>idUsuario, 'nombreUsuario'=>nombreUsuario,
-	      					 'emailUsuario'=>emailUsuario, 'authToken'=>authToken}
+	      "idUsuario"=>idUsuario, "nombreUsuario"=>nombreUsuario,
+	      "emailUsuario"=>emailUsuario, "authToken"=>authToken
 	    }.to_json(*a)
   	end
 
   	def self.json_create(o)
-    	SecurityToken.new(o["data"]["idUsuario"],o["data"]["nombreUsuario"],o["data"]["emailUsuario"],o["data"]["authToken"])
+    	SecurityToken.new(o["idUsuario"],o["nombreUsuario"],o["emailUsuario"],o["authToken"])
   	end
 end
