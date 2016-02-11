@@ -10,9 +10,9 @@ FitnessTimeApi::App.controllers :usuarios do
     usuario.peso = params[:peso]
     usuario.email = params[:email]
     if usuario.save
-      Response.get_sucsses()
+      Response.get_sucsses_response('Usuario creado con exito.')
     else
-      Response.get_error()
+      Response.get_error_response('No se pudo registrar el usuario.')
     end
   end
 
@@ -24,8 +24,12 @@ FitnessTimeApi::App.controllers :usuarios do
       securityToken = SecurityToken.new(0,params[:email],"","")
       Response.get_error_response(securityToken.to_json)      
     else
-      range = Array.new(25){[*"A".."Z", *"0".."9", *"a".."z"].sample}.join
+      range = RandomAlphanumericHelper.generate()
+      securityTokenBD = SecurityToken.first(:idUsuario => usuario.id)
       securityToken = SecurityToken.new(usuario.id,usuario.nombre,usuario.email,range)
+      if securityTokenBD != nil
+        securityTokenBD.destroy
+      end
       securityToken.save
       Response.get_sucsses_response(securityToken.to_json,{'content-Type'=>'text/plain'})
     end

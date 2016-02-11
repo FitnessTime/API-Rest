@@ -5,7 +5,7 @@ class Response
 	end
 
 	def self.get_error()
-		[404, {'content-Type'=>'text/plain'}, '']
+		[404, {'content-Type'=>'text/plain'}, 'Error']
 	end
 
 	def self.get_sucsses_response(data, headers)
