@@ -1,7 +1,7 @@
 class Response
 
 	def self.get_error_response(code,data)
-		[code, {'content-Type'=>'text/plain'}, data.to_json]
+		[code, {'content-Type'=>'text/plain'}, data]
 	end
 
 	def self.get_error()
