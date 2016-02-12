@@ -12,7 +12,7 @@ class Response
 		[200, headers, data]
 	end
 
-	def self.get_sucsses()
-		[200, {'content-Type'=>'text/plain'}, '']
+	def self.get_sucsses(data)
+		[200, {'content-Type'=>'text/plain'}, data]
 	end
 end
