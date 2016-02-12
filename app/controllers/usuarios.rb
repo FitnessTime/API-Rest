@@ -11,12 +11,12 @@ FitnessTimeApi::App.controllers :usuarios do
     usuario.email = params[:email]
     usuarios = Usuario.count(:email => usuario.email)
     if(usuarios >= 1)
-      Response.get_error_response('Ya existe un usuario con esta cuenta.')
+      Response.get_error_response(410,'Ya existe un usuario con esta cuenta.')
     else
       if usuario.save
         Response.get_sucsses('Usuario creado con exito.')
       else
-        Response.get_error_response('No se pudo registrar el usuario.')
+        Response.get_error_response(411,'No se pudo registrar el usuario.')
       end
     end
   end
@@ -27,7 +27,7 @@ FitnessTimeApi::App.controllers :usuarios do
     if usuario==nil
       #headers['X-Forwarded-For'] = request['X-Forwarded-For']
       securityToken = SecurityToken.new(0,params[:email],"","")
-      Response.get_error_response(securityToken.to_json)      
+      Response.get_error_response(404,securityToken.to_json)      
     else
       range = RandomAlphanumericHelper.generate()
       securityTokenBD = SecurityToken.first(:idUsuario => usuario.id)
