@@ -9,10 +9,15 @@ FitnessTimeApi::App.controllers :usuarios do
     usuario.fechaNacimiento = params[:fecha]
     usuario.peso = params[:peso]
     usuario.email = params[:email]
-    if usuario.save
-      Response.get_sucsses('Usuario creado con exito.')
+    usuarios = Usuario.count(:email => usuario.email)
+    if(usuarios >= 1)
+      Response.get_error_response('Ya existe un usuario con esta cuenta.')
     else
-      Response.get_error_response('No se pudo registrar el usuario.')
+      if usuario.save
+        Response.get_sucsses('Usuario creado con exito.')
+      else
+        Response.get_error_response('No se pudo registrar el usuario.')
+      end
     end
   end
 
