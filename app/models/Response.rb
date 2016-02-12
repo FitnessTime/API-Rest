@@ -1,7 +1,7 @@
 class Response
 
 	def self.get_error_response(data)
-		[404, {'content-Type'=>'text/plain'}, data]
+		[404, {'content-Type'=>'text/plain'}, data.to_json]
 	end
 
 	def self.get_error()
