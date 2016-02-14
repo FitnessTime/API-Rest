@@ -1,3 +1,4 @@
+require 'bcrypt'
 
 class Usuario
 	include DataMapper::Resource
