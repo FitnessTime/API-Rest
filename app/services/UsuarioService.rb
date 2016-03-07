@@ -4,7 +4,7 @@ Class UsuarioService < Padrino::Application
     usuario = UsuarioFactory.create(params)
     begin
       usuario.raise_on_save_failure()
-      Response.get_sucsses('Usuario creado con exito.')
+      Response.get_sucesses('Usuario creado con exito.')
     rescue
       Response.get_error_response(410,'Ya existe un usuario con esta cuenta.')
     end
@@ -14,8 +14,8 @@ Class UsuarioService < Padrino::Application
     begin
       usuario = Usuario.get!(params[:email])
       usuario.is_the_same_password?(params[:pass])
-      Response.get_sucsses("Todo ok maquina")
-    rescue ObjectNotFoundErrorv => e
+      Response.get_sucesses("Todo ok maquina")
+    rescue ObjectNotFoundError => e
       securityToken = SecurityToken.new(0,params[:email],"","")
       Response.get_error_response(404,securityToken.to_json)
     rescue DifferentPasswordError => e
