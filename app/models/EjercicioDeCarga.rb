@@ -3,10 +3,10 @@ class EjercicioDeCarga
 
 	property :id, Serial
 
-  	property :inicio, Date
-  	property :fin, Date
-    property :descripcion, String
-    property :aclaracion, String
-    has n, :rutina_de_cargas, :through => Resource
+  	property :nombre, Date
+  	property :series, Date
+    property :repeticiones, String
+    has n, :marcas, :through => Resource
+		belongs_to :rutina_de_carga
 
 end
