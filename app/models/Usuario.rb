@@ -2,12 +2,11 @@ require 'bcrypt'
 
 class Usuario
 	include DataMapper::Resource
-	
-	property :id, Serial
+
+	property :email, String , :key => true
 
 	property :nombre, String
 	property :crypted_password, String
-	property :email, String
 	property :fechaNacimiento, Date
 	property :peso, Integer
 	property :diasDeEntrenamiento, Integer, :default => 0
@@ -25,7 +24,7 @@ class Usuario
 	validates_format_of   :email, :with => :email_address
 
   def password= (password)
-    self.crypted_password = ::BCrypt::Password.create(password) unless password.nil?	
+    self.crypted_password = ::BCrypt::Password.create(password) unless password.nil?
   end
 
   def self.authenticate(email, password)
@@ -37,4 +36,8 @@ class Usuario
   def has_password?(password)
     ::BCrypt::Password.new(crypted_password) == password
   end
+
+	def is_the_same_password?(an_password)
+		return ::BCrypt::Password.new(crypted_password) == an_password
+	end
 end
