@@ -1,4 +1,4 @@
-require "json"
+require 'json'
 
 class SecurityToken 
 	include DataMapper::Resource
@@ -10,21 +10,14 @@ class SecurityToken
 	property :emailUsuario, String
 	property :authToken, String
 
-	def initialize(idUsuario, nombreUsuario, emailUsuario, authToken)
+	def initialize(emailUsuario, nombreUsuario, authToken)
 		self.idUsuario = idUsuario
 		self.nombreUsuario = nombreUsuario
 		self.emailUsuario = emailUsuario
 		self.authToken = authToken
 	end
 
-	def to_json(*a)
-	    {
-	      "idUsuario"=>idUsuario, "nombreUsuario"=>nombreUsuario,
-	      "emailUsuario"=>emailUsuario, "authToken"=>authToken
-	    }.to_json(*a)
-  	end
-
   	def self.json_create(o)
-    	SecurityToken.new(o["idUsuario"],o["nombreUsuario"],o["emailUsuario"],o["authToken"])
+    	SecurityToken.new(o["emailUsuario"],o["nombreUsuario"],o["authToken"])
   	end
 end

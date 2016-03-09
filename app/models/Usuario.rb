@@ -38,6 +38,8 @@ class Usuario
   end
 
 	def is_the_same_password?(an_password)
-		return ::BCrypt::Password.new(crypted_password) == an_password
+		if (!::BCrypt::Password.new(crypted_password) == an_password)
+			raise DifferentPasswordError
+		end
 	end
 end

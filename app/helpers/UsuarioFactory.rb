@@ -1,9 +1,9 @@
-class UsuarioFactory
+FitnessTimeApi::App.helpers do
 
-  def self.create(params)
-    usuario = Usuario.new()
+  def create_usuario(params)
+    usuario = Usuario.new
     usuario.nombre = params[:nombre]
-    usuario.password = (params[:pass])
+    usuario.password = params[:pass]
     usuario.fechaNacimiento = params[:fecha]
     usuario.peso = params[:peso]
     usuario.email = params[:email]

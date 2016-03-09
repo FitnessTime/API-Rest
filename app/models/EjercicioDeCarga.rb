@@ -1,12 +1,12 @@
 class EjercicioDeCarga
 	include DataMapper::Resource
 
-	property :id, Serial
+	property :id, Serial, :key => true
 
-  	property :nombre, Date
-  	property :series, Date
-    property :repeticiones, String
+  	property :nombre, String
+  	property :series, Integer
+    property :repeticiones, Integer
     has n, :marcas, :through => Resource
-		belongs_to :rutina_de_carga
+	belongs_to :rutina_de_carga
 
 end
