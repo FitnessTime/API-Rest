@@ -14,7 +14,7 @@ class Usuario
 	property :minimoDeKilometrosRecorridos, Integer, :default => 0
 	has n, :rutina_de_cargas, :through => Resource
 	has n, :rutina_de_aerobicos, :through => Resource
-	has n, :estadistica
+	has n, :estadistica, :through => Resource
 
 	validates_presence_of :nombre
 	validates_presence_of :crypted_password
@@ -38,8 +38,6 @@ class Usuario
   end
 
 	def is_the_same_password?(an_password)
-		if (!::BCrypt::Password.new(crypted_password) == an_password)
-			raise DifferentPasswordError
-		end
+		::BCrypt::Password.new(crypted_password) == an_password
 	end
 end

@@ -1,4 +1,3 @@
-
 FitnessTimeApi::App.controllers :usuarioService do
   
   get :registrar, :map => '/registrar' do
@@ -13,15 +12,23 @@ FitnessTimeApi::App.controllers :usuarioService do
   end
 
   get :autenticar, :map => '/autenticar' do
-    begin
-      usuario = Usuario.get(:email => params[:email])
-      usuario.is_the_same_password?(params[:pass])
-      Response.get_sucesses("Todo ok maquina")
-    rescue ObjectNotFoundError
-      securityToken = SecurityToken.new(usuario.email,usuario.nombre,generate_random)
-      Response.get_error_response(404,securityToken.to_json)
-    rescue DifferentPasswordError
-      Respone.get_error_response(XXX,e.message())
+    
+      usuario = Usuario.find_by_email(params[:email])
+      
+      if usuario == nil
+        #headers['X-Forwarded-For'] = request['X-Forwarded-For']
+        get_error_response(404, "No existe el usuario")
+      else if usuario.is_the_same_password?(params[:pass])
+            securityTokenBD = SecurityToken.first(:emailUsuario => usuario.email)
+            if securityTokenBD != nil
+              securityTokenBD.destroy
+            end
+            securityToken = SecurityToken.new(usuario.email,usuario.nombre,generate_random)
+            securityToken.save
+            get_sucsses_response(securityToken.to_json)
+          else
+            get_error_response(404, "La contrasenia es incorrecta")
+      end
     end
   end
 
