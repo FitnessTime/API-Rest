@@ -9,6 +9,9 @@ autenticar:
 
 	http:/api-fitnesstime.herokuapp.com/autenticar?email=:email&pass=:pass
 
-registrar
+registrar:
 
 	http://api-fitnesstime.herokuapp.com/registrar?email=:email&pass=:pass&nombre=:nombre&fecha=:fecha&peso=:peso
+
+cerrar session:
+	http://api-fitnesstime.herokuapp.com/cerrarSession?email=:email&authToken=:authToken

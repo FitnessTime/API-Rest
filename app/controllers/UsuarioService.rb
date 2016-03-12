@@ -5,6 +5,7 @@ FitnessTimeApi::App.controllers :usuarioService do
     begin
       usuario = create_usuario(params)
       usuario.save
+      enviar_mail_bienvenida(usuario.email, usuario.email, params[:pass])
       get_sucsses_response('Usuario creado con exito.')
     rescue Exception
       get_error_response(410,'Ya existe un usuario con esta cuenta.')
@@ -19,10 +20,6 @@ FitnessTimeApi::App.controllers :usuarioService do
         #headers['X-Forwarded-For'] = request['X-Forwarded-For']
         get_error_response(404, "No existe el usuario")
       else if usuario.is_the_same_password?(params[:pass])
-            securityTokenBD = SecurityToken.first(:emailUsuario => usuario.email)
-            if securityTokenBD != nil
-              securityTokenBD.destroy
-            end
             securityToken = SecurityToken.new(usuario.email,usuario.nombre,generate_random)
             securityToken.save
             get_sucsses_response(securityToken.to_json)
@@ -30,6 +27,13 @@ FitnessTimeApi::App.controllers :usuarioService do
             get_error_response(404, "La contrasenia es incorrecta")
       end
     end
+  end
+
+  get :cerrarSession, :map => 'cerrarSession' do
+    #enviar_mail_bienvenida("skalic.julian@gmail.com", "usuario", "contrasenia")
+    securityTokenBD = SecurityToken.first(:emailUsuario => params[:email], :authToken => params[:authToken])
+    securityTokenBD.destroy
+    get_sucsses_response('')
   end
 
 end
