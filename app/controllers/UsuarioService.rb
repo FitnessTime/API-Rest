@@ -1,39 +1,35 @@
 FitnessTimeApi::App.controllers :usuarioService do
-  
-  get :registrar, :map => '/registrar' do
-    
+  #  Para que iba el :map?
+  post :registrarUsuario => '/registrarUsuario' do
     begin
       usuario = create_usuario(params)
       usuario.save
       enviar_mail_bienvenida(usuario.email, usuario.email, params[:pass])
       get_sucsses_response('Usuario creado con exito.')
-    rescue Exception
+    rescue ElUsuarioYaExiste
       get_error_response(410,'Ya existe un usuario con esta cuenta.')
     end
   end
 
-  get :autenticar, :map => '/autenticar' do
-    
-      usuario = Usuario.find_by_email(params[:email])
-      
-      if usuario == nil
-        #headers['X-Forwarded-For'] = request['X-Forwarded-For']
-        get_error_response(404, "No existe el usuario")
-      else if usuario.is_the_same_password?(params[:pass])
-            securityToken = SecurityToken.new(usuario.email,usuario.nombre,generate_random)
-            securityToken.save
-            get_sucsses_response(securityToken.to_json)
-          else
-            get_error_response(404, "La contrasenia es incorrecta")
-      end
-    end
+  get :modificarUsuario => '/modificarUsuario' do
+    # antes de arrancar con la modificacion hay que validar que tiene permisos
+    # para hacerlo con el codigo de autenticacion
+    @usuario = Usuario.get(params[:email])
+    update_usuario(@usuario,params)
+    @usuario.save
+    # tendriamos que redirigir a algun lado?
   end
 
-  get :cerrarSession, :map => 'cerrarSession' do
-    #enviar_mail_bienvenida("skalic.julian@gmail.com", "usuario", "contrasenia")
-    securityTokenBD = SecurityToken.first(:emailUsuario => params[:email], :authToken => params[:authToken])
-    securityTokenBD.destroy
-    get_sucsses_response('')
+  get :eliminarCuenta => '/eliminarCuenta' do
+    #validamos que pueda realizar la operaciones
+    Usuario.destroy(params[:email])
+    # cerramos la sesion eliminando el codigo de autenticacion.
+
+    # mandamos en el response el mensaje de que esta todo ok
   end
 
+  get :usuario => '/usuario' do
+    # verificamos los permisos que tenga, y lo redirigimos a la vista de usuario
+    @usuario = Usuario.get(params[:email])
+  end
 end
