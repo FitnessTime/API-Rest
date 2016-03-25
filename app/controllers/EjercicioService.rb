@@ -1,13 +1,13 @@
 FitnessTimeApi::App.controllers :ejercicioService do
 
   # Asi es como me gustaria que sea... no se si funciona...
-  post :registrarEjercicio => '/rutinas/#{@rutina.id}/registrarEjercicio' do
+  post :registrarEjercicio, :map => '/rutinas/#{@rutina.id}/registrarEjercicio' do
     # Verificamos que se pueda realizar la operacion
     @ejercicio = create_ejercicio(params)
     @ejercicio.save
   end
 
-  get :ejercicios => '/rutinas/#{@rutina.id}/ejercicios' do
+  get :ejercicios, :map => '/rutinas/#{@rutina.id}/ejercicios' do
     # Verificamos que se pueda realizar la operacion
     @usuario = Usuario.get([:email])
     @rutinas = @usuario.getRutinas()
