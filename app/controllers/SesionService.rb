@@ -1,3 +1,6 @@
+require_relative '../exceptions/ObjectNotFoundError'
+require_relative '../exceptions/DifferentPasswordError'
+
 FitnessTimeApi::App.controllers :sesionService do
 
   get :iniciarSesion, :map => '/login' do
