@@ -6,10 +6,10 @@ FitnessTimeApi::App.controllers :sesionService do
       securityToken = SecurityToken.new(usuario.email,usuario.nombre,generate_random)
       securityToken.save
       get_sucsses_response(securityToken.to_json)
-    rescue RuntimeError
+    rescue ObjectNotFoundError => e
       get_error_response(404, "No existe el usuario")
-    rescue DifferentPasswordError
-      get_error_response(404, "La contrasenia es incorrecta")
+    rescue DifferentPasswordError => e
+      get_error_response(404, e.message())
     end
   end
 

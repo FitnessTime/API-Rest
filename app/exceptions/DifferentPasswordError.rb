@@ -1,5 +1,5 @@
-class DifferentPasswordError < StandardError
-  def initialize(msg)
-    super(msg)
+class DifferentPasswordError < RutinmeError
+  def message()
+    return("El password es incorrecto")
   end
 end
