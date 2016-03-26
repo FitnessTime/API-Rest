@@ -1,5 +1,4 @@
 require 'bcrypt'
-require_relative '../exceptions/ObjectNotFoundError'
 
 class Usuario
 	include DataMapper::Resource
@@ -23,12 +22,6 @@ class Usuario
 	validates_presence_of :fechaNacimiento
 	validates_presence_of :peso
 	validates_format_of   :email, :with => :email_address
-
-	after :get do |usr|
-		if(usr == nil)
-			raise ObjectNotFoundError.new()
-		end
-	end
 
   def password= (password)
     self.crypted_password = ::BCrypt::Password.create(password) unless password.nil?

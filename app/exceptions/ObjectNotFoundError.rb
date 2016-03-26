@@ -1,4 +1,4 @@
-class ObjectNotFoundError < RuntinmeError
+class ObjectNotFoundError < RuntimeError
   def message()
     "Error, no se ecnontro el usuario"
   end

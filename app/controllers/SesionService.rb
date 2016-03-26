@@ -1,18 +1,19 @@
-require_relative '../exceptions/ObjectNotFoundError'
+
 require_relative '../exceptions/DifferentPasswordError'
 
 FitnessTimeApi::App.controllers :sesionService do
 
   get :iniciarSesion, :map => '/login' do
     begin
-      usuario = Usuario.get(params[:email])
+      usuario = Usuario.get!(params[:email])
       securityToken = SecurityToken.new(usuario.email,usuario.nombre,generate_random)
       securityToken.save
       get_sucsses_response(securityToken.to_json)
-    rescue ObjectNotFoundError => e
-      get_error_response(404, "No existe el usuario")
+      
     rescue DifferentPasswordError => e
       get_error_response(404, e.message())
+    rescue DataMapper::ObjectNotFoundError => e
+      get_error_response(404, "No existe el usuario")
     end
   end
 
