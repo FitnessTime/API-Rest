@@ -5,11 +5,13 @@ FitnessTimeApi::App.controllers :sesionService do
   get :iniciarSesion, :map => '/login' do
     begin
       usuario = Usuario.get!(params[:email])
-      securityToken = SecurityToken.new(usuario.email,usuario.nombre,generate_random)
-      securityToken.save()
-      get_success_response(securityToken.to_json)
-    rescue DifferentPasswordError => e
-      get_error_response(404, e.message())
+      if(usuario.is_the_same_password?(params[:pass]))
+        securityToken = SecurityToken.new(usuario.email,usuario.nombre,generate_random)
+        securityToken.save()
+        get_success_response(securityToken.to_json)
+      else
+        get_error_response(404, 'La contrasenia es incorrecta')
+      end
     rescue DataMapper::ObjectNotFoundError => e
       get_error_response(404, "No existe el usuario")
     end
