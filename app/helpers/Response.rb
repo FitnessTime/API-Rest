@@ -8,11 +8,11 @@ FitnessTimeApi::App.helpers do
 		[404, {'content-Type'=>'text/plain'}, 'Error']
 	end
 
-	def get_sucsses(data, headers)
+	def get_success(data, headers)
 		[200, headers, data]
 	end
 
-	def get_sucsses_response(data)
+	def get_success_response(data)
 		[200, {'content-Type'=>'text/plain'}, data]
 	end
 end

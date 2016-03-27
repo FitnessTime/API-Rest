@@ -1,34 +1,37 @@
 FitnessTimeApi::App.controllers :rutinaService do
 
-  post :registrar, :map => '/crear' do
+  post :registrarRutina, :map => '/rutinas' do
     securityToken = SecurityToken.find_by_authToken(:authToken => params[:authToken])
     if securityToken == nil
       get_error_response(413,'Usuario no autorizado.')
     end
+    #Creamos la rutina
+    #Guardamos la rutina
+    #Comunicamos el resultado de la operacion y mandamos el json
   end
 
-  get :rutinas, :with => :email do
+  get :rutinas, :map => '/rutinas' do
       @usuario = Usuario.get([:email])
       @rutinas = @usuario.getRutinas()
-      render '/rutinas/'
+      #Comunicamos el resultado de la operacicon y mandamos el json
   end
 
-  post :editar, :with => :rutina_id do
+  put :editarRutina, :map => '/rutinas/:rutina_id' do
     @rutina = Rutina.get(params[:rutina_id])
     #falta definir el metodo actualizar_rutina
     actualizar_rutina(@rutina)
-    render '/rutinas/#{@rutina.id}'
+    #Comunicamos el resultado de la operacion y mandamos el json
   end
 
-  get :eliminar, :with => :rutina_id do
+  delete :eliminarRutina, :map => '/rutinas/:rutina_id' do
     @rutina = Rutina.get(params[:rutina_id])
-    @rutina.destroy
-    render '/rutinas'
+    @rutina.destroy!()
+    #Comunicamos el resultado de la operacion y mandamos el json
   end
 
-  get :consultar, :with => :rutina_id do
+  get :consultar, :map => '/rutinas/:rutina_id' do
     @rutina = Rutina.get(params[:rutina_id])
-    render '/rutinas/#{@rutina.id}'
+    #Comunicamos el resultado de la operaicon y mandamos el json
   end
 
 end

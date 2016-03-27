@@ -1,34 +1,34 @@
 FitnessTimeApi::App.controllers :ejercicioService do
 
-  # Asi es como me gustaria que sea... no se si funciona...
-  post :registrarEjercicio, :map => '/rutinas/#{@rutina.id}/registrarEjercicio' do
+  post :registrarEjercicio, :map => '/rutinas/:rutina_id/ejercicios' do
     # Verificamos que se pueda realizar la operacion
     @ejercicio = create_ejercicio(params)
-    @ejercicio.save
+    @ejercicio.save()!
+    #Comunicamos el resultado de la operacion y mandamos el json
   end
 
-  get :ejercicios, :map => '/rutinas/#{@rutina.id}/ejercicios' do
+  get :ejercicios, :map => '/rutinas/:rutina_id/ejercicios' do
     # Verificamos que se pueda realizar la operacion
     @usuario = Usuario.get([:email])
     @rutinas = @usuario.getRutinas()
-    # devolvemos el json en el response
+    #Comunicamos el resultado de la operacion y mandamos el json
   end
 
-  get :modificarEjercicio, :with => :rutina_id do
+  put :modificarEjercicio, :map => '/rutinas/:rutina_id/ejercicios/:ejercicio_id' do
     @rutina = Rutina.get(params[:rutina_id])
     #falta definir el metodo actualizar_rutina
-    actualizar_rutina(@rutina)
-    render '/rutinas/#{@rutina.id}'
+    actualizar_rutina(@rutina,params)
+    #Comunicamos el resultado de la operacion y mandamos el json
   end
 
-  get :eliminar, :with => :rutina_id do
+  delete :eliminar, :map => '/rutinas/:rutina_id/ejercicios/:ejercicio_id' do
     @rutina = Rutina.get(params[:rutina_id])
-    @rutina.destroy
-    render '/rutinas'
+    @rutina.destroy!()
+    #Comunicamos el resultado de la operacion y mandamos el json
   end
 
-  get :consultar, :with => :rutina_id do
+  get :consultarEjercicio, :map => '/rutinas/:rutina_id/ejercicios/:ejercicio_id' do
     @rutina = Rutina.get(params[:rutina_id])
-    render '/rutinas/#{@rutina.id}'
+    #Comunicamos el resultado de la operacion y mandamos el json
   end
 end
