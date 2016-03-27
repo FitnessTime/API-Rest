@@ -23,21 +23,21 @@ class Usuario
 	validates_presence_of :peso
 	validates_format_of   :email, :with => :email_address
 
-  def password= (password)
-    self.crypted_password = ::BCrypt::Password.create(password) unless password.nil?
-  end
+  	def password= (password)
+    	self.crypted_password = ::BCrypt::Password.create(password) unless password.nil?
+  	end
 
-  def self.authenticate(email, password)
-    user = Usuario.find_by_email(email)
-    return nil if user.nil?
-    user.has_password?(password)? user : nil
-  end
+  	def self.authenticate(email, password)
+    	user = Usuario.find_by_email(email)
+    	return nil if user.nil?
+    	user.has_password?(password)? user : nil
+  	end
 
-  def has_password?(password)
-    ::BCrypt::Password.new(crypted_password) == password
-  end
+  	def has_password?(password)
+    	::BCrypt::Password.new(crypted_password) == password
+  	end
 
-	def is_the_same_password?(an_password)
+  	def is_the_same_password?(an_password)
 		::BCrypt::Password.new(crypted_password) == an_password
 	end
 end
