@@ -1,6 +1,6 @@
 FitnessTimeApi::App.controllers :usuarioService do
 
-  post :registrarUsuario, :map => '/registrarUsuari' do
+  post :registrarUsuario, :map => '/registrarUsuario' do
     begin
       usuario = create_usuario(params)
       usuario.save
@@ -25,7 +25,7 @@ FitnessTimeApi::App.controllers :usuarioService do
   get :cambiarContrasenia, :map => '/cambiarContrasenia' do
     securityToken = SecurityToken.first(:emailUsuario => params[:email], :authToken => params[:authToken])
     if(securityToken == nil)
-      get_error_response(412,'Usuario no autenticado')
+      get_error_response(412,'Usuario no autenticado'.to_json)
     else
       @usuario = Usuario.find_by_email(params[:email])
       pass = ::BCrypt::Password.create(params[:nuevaPass]) unless params[:nuevaPass].nil?
