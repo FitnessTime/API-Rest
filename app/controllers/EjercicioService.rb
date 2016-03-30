@@ -3,7 +3,7 @@ FitnessTimeApi::App.controllers :ejercicioService do
   post :registrarEjercicio, :map => '/rutinas/:rutina_id/ejercicios' do
     # Verificamos que se pueda realizar la operacion
     @ejercicio = create_ejercicio(params)
-    @ejercicio.save()
+    @ejercicio.save()!
     #Comunicamos el resultado de la operacion y mandamos el json
   end
 

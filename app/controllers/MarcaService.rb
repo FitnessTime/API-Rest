@@ -2,9 +2,8 @@ FitnessTimeApi::App.controllers :marcaService do
 
   post :registrarMarca, :map => '/rutinas/:rutina_id/ejercicios/:ejercicio_id/marcas' do
     # Verificamos que se pueda realizar la operacion
-    # creamos la nueva marca
-    # la agregamos al ejercicio
-    # guardamos los cambios
+    marca = create_marca(params)
+    marca.save()
     #Comunicamos el resultado de la operacion y mandamos el json
   end
 
@@ -16,7 +15,7 @@ FitnessTimeApi::App.controllers :marcaService do
 
   put :modificarEjercicio, :map => '/rutinas/:rutina_id/ejercicios/:ejercicio_id/marcas/:marca_id' do
     @marca = Marca.get!(params[:marca_id])
-    #falta definir el metodo actualizar_marca
+    actualizar_marca(@marca,params)
     #Comunicamos el resultado de la operacion y mandamos el json
   end
 

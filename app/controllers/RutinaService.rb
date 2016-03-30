@@ -5,8 +5,8 @@ FitnessTimeApi::App.controllers :rutinaService do
     if securityToken == nil
       get_error_response(413,'Usuario no autorizado.')
     end
-    #Creamos la rutina
-    #Guardamos la rutina
+    rutina = create_rutina(params)
+    rutina.save()
     #Comunicamos el resultado de la operacion y mandamos el json
   end
 
@@ -18,8 +18,7 @@ FitnessTimeApi::App.controllers :rutinaService do
 
   put :editarRutina, :map => '/rutinas/:rutina_id' do
     @rutina = Rutina.get(params[:rutina_id])
-    #falta definir el metodo actualizar_rutina
-    actualizar_rutina(@rutina)
+    actualizar_rutina(@rutina,params)
     #Comunicamos el resultado de la operacion y mandamos el json
   end
 

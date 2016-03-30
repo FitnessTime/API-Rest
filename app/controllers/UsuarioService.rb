@@ -3,7 +3,7 @@ FitnessTimeApi::App.controllers :usuarioService do
   post :registrarUsuario, :map => '/registrarUsuario' do
     begin
       usuario = create_usuario(params)
-      usuario.save
+      usuario.save()
       enviar_mail_bienvenida(usuario.email, usuario.email, params[:pass])
       get_success_response('Usuario creado con exito.')
     rescue DataMapper::SaveFailureError

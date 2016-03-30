@@ -19,7 +19,7 @@ FitnessTimeApi::App.controllers :sesionService do
 
   get :cerrarSesion, :map => '/close' do
     securityTokenBD = SecurityToken.first(:emailUsuario => params[:email], :authToken => params[:authToken])
-    securityTokenBD.destroy
+    securityTokenBD.destroy()
     get_success_response('')
   end
 end
