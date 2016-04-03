@@ -15,6 +15,8 @@ class Usuario
 	has n, :rutina_de_cargas, :through => Resource
 	has n, :rutina_de_aerobicos, :through => Resource
 	has n, :estadistica, :through => Resource
+	has n, :pasos, :through => Resource
+	has n, :kilometros, :through => Resource
 
 	validates_presence_of :nombre
 	validates_presence_of :crypted_password
