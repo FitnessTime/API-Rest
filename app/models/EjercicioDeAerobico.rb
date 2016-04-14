@@ -1,14 +1,9 @@
-class EjercicioDeAerobico
-	include DataMapper::Resource
+require_relative  "../models/Ejercicio"
 
-	property :id, Serial , :key => true
+class EjercicioDeAerobico < Ejercicio
 
-  	property :nombre, String
-  	property :series, Integer
   	property :tiempoActivo, Integer
   	property :tiempoDescanso, Integer
-		property :dia_de_entrenamiento, String
   	has n, :marcas, :through => Resource
-	belongs_to :rutina_de_aerobico
 
 end

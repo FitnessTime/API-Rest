@@ -9,7 +9,7 @@ class Rutina
     property :aclaracion, String
     property :version, Integer
     property :estaSincronizado, Boolean
-    property :rutina_de_carga?, Boolean
+    property :rutinaDeCarga, Boolean
     has n, :ejercicios, :through => Resource
     belongs_to :usuario
 

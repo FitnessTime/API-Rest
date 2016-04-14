@@ -12,8 +12,7 @@ class Usuario
 	property :diasDeEntrenamiento, Integer, :default => 0
 	property :minimoDePasosDiarios, Integer, :default => 0
 	property :minimoDeKilometrosRecorridos, Integer, :default => 0
-	has n, :rutina_de_cargas, :through => Resource
-	has n, :rutina_de_aerobicos, :through => Resource
+	has n, :rutina, :through => Resource
 	has n, :estadistica, :through => Resource
 	has n, :pasos, :through => Resource
 	has n, :kilometros, :through => Resource
