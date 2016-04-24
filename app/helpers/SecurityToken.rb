@@ -3,8 +3,7 @@ require 'dm-serializer'
 class SecurityToken 
 	include DataMapper::Resource
 	
-	property :id, Serial
-	property :emailUsuario, String
+	property :emailUsuario, String, :key => true
 	property :nombreUsuario, String
 	property :authToken, String
 
