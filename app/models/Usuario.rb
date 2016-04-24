@@ -14,7 +14,7 @@ class Usuario
 	property :minimoDeKilometrosRecorridos, Integer, :default => 0
 	has n, :rutina, :through => Resource
 	has n, :estadistica, :through => Resource
-	has n, :pasos, :through => Resource
+	has n, :paso, :through => Resource
 	has n, :kilometros, :through => Resource
 
 	validates_presence_of :nombre
