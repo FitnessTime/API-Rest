@@ -1,7 +1,7 @@
 class Rutina
 	include DataMapper::Resource
 
-	property :id, Serial, :key => true
+	property :id, Serial
 
   	property :inicio, Date
   	property :fin, Date
