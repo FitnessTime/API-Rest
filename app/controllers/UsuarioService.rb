@@ -1,6 +1,6 @@
 FitnessTimeApi::App.controllers :usuarioService do
 
-  post :registrarUsuario, :map => '/registrarUsuario' do
+  get :registrarUsuario, :map => '/registrarUsuario' do
     begin
       usuario = create_usuario(params)
       usuario.save()
