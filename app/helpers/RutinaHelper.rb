@@ -16,7 +16,7 @@ FitnessTimeApi::App.helpers do
   	rutina.fin = params[:fin]
     rutina.descripcion = params[:descripcion]
     rutina.aclaracion = params[:aclaracion]
-    rutina.rutina_de_carga?= params[:rutina_de_carga?]
+    rutina.rutina_de_carga = params[:rutina_de_carga?]
     rutina.save!()
   end
 
