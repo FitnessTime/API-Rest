@@ -1,8 +1,12 @@
+require 'dm-serializer'
+
 FitnessTimeApi::App.helpers do
 
-  def actualizar_rutina(rutina,params)
-    update(:inicio => params[:inicio], :fin => params[:fin],
-    			   :descripcion => params[:descripcion], :aclaracion => params[:aclaracion])
+  def actualizar_rutina(params)
+    rutina = Rutina.find_by_id(params[:id])
+    jsonRutina = JSON.parse(jsonRutina[:rutina])
+    rutina.update(:inicio => jsonRutina['inicio'], :fin => jsonRutina['fin'],
+    			   :descripcion => jsonRutina['descripcion'], :aclaracion => jsonRutina['aclaracion'])
     # if(rutina.rutina_de_carga?)
     #   actualizar_rutina_de_carga(rutina,params)
     # else
@@ -11,13 +15,16 @@ FitnessTimeApi::App.helpers do
   end
 
   def create_rutina(params)
+    jsonRutina = JSON.parse(params[:rutina])
+    usuario = Usuario.find_by_email(jsonRutina['idUsuario'])
     rutina = Rutina.new()
-    rutina.inicio = params[:inicio]
-  	rutina.fin = params[:fin]
-    rutina.descripcion = params[:descripcion]
-    rutina.aclaracion = params[:aclaracion]
-    rutina.rutina_de_carga = params[:rutina_de_carga?]
-    rutina.save!()
+    rutina.inicio = jsonRutina['inicio']
+  	rutina.fin = jsonRutina['fin']
+    rutina.descripcion = jsonRutina['descripcion']
+    rutina.aclaracion = jsonRutina['aclaracion']
+    rutina.rutinaDeCarga = jsonRutina['rutina_de_carga']
+    rutina.usuario = usuario
+    return rutina
   end
 
   # def actualizar_rutina_de_carga(rutina,params)

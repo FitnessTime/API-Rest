@@ -34,7 +34,7 @@ gem 'bcrypt-ruby', :require => 'bcrypt'
 gem 'json'
 gem 'clockwork'
 gem 'twitter'
-gem 'dm-postgres-adapter'
+#gem 'dm-postgres-adapter'
 
 # Test requirements
 group :staging, :production do
@@ -58,6 +58,7 @@ end
 group :development do
   gem 'guard'   
   gem 'guard-rspec'
+  #gem 'dm-postgres-adapter'
   #gem 'debugger'
 end
 

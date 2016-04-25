@@ -1,19 +1,29 @@
 FitnessTimeApi::App.controllers :rutinaService do
 
-  post :registrarRutina, :map => '/rutinas' do
-    securityToken = SecurityToken.find_by_authToken(:authToken => params[:authToken])
+  get :registrarRutina, :map => '/rutinas/crear' do
+    securityToken = SecurityToken.find_by_authToken(params[:authToken])
     if securityToken == nil
       get_error_response(413,'Usuario no autorizado.')
+    else
+      begin
+        rutina = create_rutina(params)
+        rutina.save!()
+        get_success_response("Rutina creada con exito.")
+      rescue DataMapper::SaveFailureError
+        get_error_response(404,'No se pudo crear la rutina')
+      end
     end
-    rutina = create_rutina(params)
-    rutina.save()
-    #Comunicamos el resultado de la operacion y mandamos el json
   end
 
   get :rutinas, :map => '/rutinas' do
-      @usuario = Usuario.get([:email])
-      @rutinas = @usuario.getRutinas()
-      #Comunicamos el resultado de la operacicon y mandamos el json
+      securityToken = SecurityToken.find_by_authToken(params[:authToken])
+      if securityToken == nil
+        get_error_response(413,'Usuario no autorizado.')
+      else
+        usuario = Usuario.find_by_email(securityToken.emailUsuario)
+        rutinas = Rutina.find_all_by_usuario(usuario)
+        get_success_response(rutinas.to_json)
+      end
   end
 
   put :editarRutina, :map => '/rutinas/:rutina_id' do
