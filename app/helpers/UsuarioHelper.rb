@@ -7,13 +7,13 @@ FitnessTimeApi::App.helpers do
   end
 
   def create_usuario(params)
+    jsonUsuario = JSON.parse(params[:usuario])
     usuario = Usuario.new
-    usuario.nombre = params[:nombre]
-    usuario.password = params[:pass]
-    usuario.fechaNacimiento = params[:fecha]
-    usuario.peso = params[:peso]
-    usuario.email = params[:email]
+    usuario.nombre = jsonUsuario['nombre']
+    usuario.password = jsonUsuario['password']
+    usuario.fechaNacimiento = jsonUsuario['fecha']
+    usuario.peso = jsonUsuario['peso']
+    usuario.email = jsonUsuario['email']
     return usuario
   end
-
 end
