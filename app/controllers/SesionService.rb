@@ -10,10 +10,10 @@ FitnessTimeApi::App.controllers :sesionService do
         securityToken.save()
         get_success_response(securityToken.to_json)
       else
-        get_error_response(404, 'La contrasenia es incorrecta')
+        get_error_response(404, "La contrasenia es incorrecta.".to_json)
       end
     rescue DataMapper::ObjectNotFoundError => e
-      get_error_response(404, "No existe el usuario")
+      get_error_response(404, "No existe el usuario".to_json)
     end
   end
 
