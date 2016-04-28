@@ -6,8 +6,8 @@ FitnessTimeApi::App.controllers :usuarioService do
       usuario.save!()
       jsonUsuario = JSON.parse(params[:usuario])
       enviar_mail_bienvenida(usuario.email, usuario.email, jsonUsuario['password'])
-      get_success_response('Usuario creado con exito.')
-    rescue DataMapper::SaveFailureError
+      get_success_response("Usuario creado con exito.")
+    rescue Exception
       get_error_response(410,'Ya existe un usuario con esta cuenta.')
     end
   end

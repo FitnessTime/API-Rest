@@ -13,6 +13,7 @@ FitnessTimeApi::App.helpers do
 	end
 
 	def get_success_response(data)
-		[200, {'content-Type'=>'text/plain'}, data]
+		response = Response.new(200, data)
+		response.to_json
 	end
 end
