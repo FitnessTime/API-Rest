@@ -18,7 +18,7 @@ FitnessTimeApi::App.controllers :rutinaService do
   get :rutinas, :map => '/rutinas' do
       securityToken = SecurityToken.find_by_authToken(params[:authToken])
       if securityToken == nil
-        get_error_response(413,'Usuario no autorizado.')
+        get_error_response(404,"Usuario no autorizado.")
       else
         usuario = Usuario.find_by_email(securityToken.emailUsuario)
         rutinas = Rutina.find_all_by_usuario(usuario)

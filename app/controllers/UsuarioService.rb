@@ -26,12 +26,12 @@ FitnessTimeApi::App.controllers :usuarioService do
   get :cambiarContrasenia, :map => '/cambiarContrasenia' do
     securityToken = SecurityToken.first(:emailUsuario => params[:email], :authToken => params[:authToken])
     if(securityToken == nil)
-      get_error_response(412,'Usuario no autenticado'.to_json)
+      get_error_response(404,"Usuario no autenticado")
     else
       @usuario = Usuario.find_by_email(params[:email])
       pass = ::BCrypt::Password.create(params[:nuevaPass]) unless params[:nuevaPass].nil?
       @usuario.update(:crypted_password => pass)
-      get_success_response('Contrasenia cambiada con exito.')
+      get_success_response("Contrasenia cambiada con exito.")
     end
   end
 
