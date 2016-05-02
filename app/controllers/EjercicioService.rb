@@ -11,6 +11,7 @@ FitnessTimeApi::App.controllers :ejercicioService do
     # Verificamos que se pueda realizar la operacion
     @usuario = Usuario.get([:email])
     @rutinas = @usuario.getRutinas()
+    get_success_response(@rutinas.getEjercicios().to_json())
     #Comunicamos el resultado de la operacion y mandamos el json
   end
 

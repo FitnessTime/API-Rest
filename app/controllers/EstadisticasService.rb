@@ -1,5 +1,6 @@
 FitnessTimeApi::App.controllers :estadisticasService do
-
+# Puede que mas adelante nos convenga "divir" el comportamiento por endidad a
+# nivel objeto, pero es solo una idea.
   get :pasosDiarios , :map => '/estadisticas/pasos' do
 
   end

@@ -1,5 +1,5 @@
 FitnessTimeApi::App.controllers :marcaService do
-
+  
   post :registrarMarca, :map => '/rutinas/:rutina_id/ejercicios/:ejercicio_id/marcas' do
     # Verificamos que se pueda realizar la operacion
     marca = create_marca(params)

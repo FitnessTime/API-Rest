@@ -1,6 +1,6 @@
 FitnessTimeApi::App.controllers :rutinaService do
 
-  get :registrarRutina, :map => '/rutinas/crear' do
+  post :registrarRutina, :map => '/rutinas' do
     securityToken = SecurityToken.find_by_authToken(params[:authToken])
     if securityToken == nil
       get_error_response(413,'Usuario no autorizado.')
