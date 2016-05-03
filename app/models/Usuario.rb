@@ -13,7 +13,6 @@ class Usuario
 	property :minimoDePasosDiarios, Integer, :default => 0
 	property :minimoDeKilometrosRecorridos, Integer, :default => 0
 	has n, :rutina, :through => Resource
-	has n, :estadistica, :through => Resource
 	has n, :paso, :through => Resource
 	has n, :kilometros, :through => Resource
 
