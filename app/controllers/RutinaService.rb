@@ -8,7 +8,7 @@ FitnessTimeApi::App.controllers :rutinaService do
       begin
         rutina = create_rutina(params)
         rutina.save!()
-        get_success_response("Rutina creada con exito.")
+        get_success_response(rutina.to_json)
       rescue DataMapper::SaveFailureError
         get_error_response(404,'No se pudo crear la rutina')
       end

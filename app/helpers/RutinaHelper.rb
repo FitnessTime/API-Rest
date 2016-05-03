@@ -23,6 +23,8 @@ FitnessTimeApi::App.helpers do
     rutina.descripcion = jsonRutina['descripcion']
     rutina.aclaracion = jsonRutina['aclaracion']
     rutina.rutinaDeCarga = jsonRutina['rutina_de_carga']
+    rutina.estaSincronizada = true
+    rutina.version = 0
     rutina.usuario = usuario
     return rutina
   end
