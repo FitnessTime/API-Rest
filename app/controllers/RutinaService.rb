@@ -1,3 +1,5 @@
+require_relative '../Assemblers/RutinaAssembler.rb'
+
 FitnessTimeApi::App.controllers :rutinaService do
 
   post :registrarRutina, :map => '/rutinas' do
@@ -8,7 +10,9 @@ FitnessTimeApi::App.controllers :rutinaService do
       begin
         rutina = create_rutina(params)
         rutina.save!()
-        get_success_response(rutina.to_json)
+        assembler = RutinaAssembler.new
+        rutinaDTO = assembler.crear_dto(rutina)
+        get_success_response(rutinaDTO.to_json)
       rescue DataMapper::SaveFailureError
         get_error_response(404,'No se pudo crear la rutina')
       end

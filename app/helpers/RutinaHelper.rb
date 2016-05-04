@@ -18,13 +18,13 @@ FitnessTimeApi::App.helpers do
     jsonRutina = JSON.parse(params[:rutina])
     usuario = Usuario.find_by_email(jsonRutina['idUsuario'])
     rutina = Rutina.new()
+    rutina.idMobile = jsonRutina['idMobile']
     rutina.inicio = jsonRutina['inicio']
   	rutina.fin = jsonRutina['fin']
     rutina.descripcion = jsonRutina['descripcion']
     rutina.aclaracion = jsonRutina['aclaracion']
-    rutina.rutinaDeCarga = jsonRutina['rutina_de_carga']
+    rutina.rutinaDeCarga = jsonRutina['esDeCarga']
     rutina.estaSincronizado = true
-    rutina.version = 0
     rutina.usuario = usuario
     return rutina
   end
