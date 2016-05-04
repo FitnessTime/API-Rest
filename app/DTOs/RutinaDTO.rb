@@ -17,6 +17,6 @@ class RutinaDTO
         {"idWeb" => self.idWeb, "idMobile" => self.idMobile, "inicio" => self.inicio, "fin" => self.fin,
          "descripcion" => self.descripcion, "aclaracion" => self.aclaracion, "versionWeb" => self.versionWeb,
          "versionMobile" => self.versionMobile, "estaSincronizado" => self.estaSincronizado,
-         "rutinaDeCarga" => self.rutinaDeCarga, "idUsuario" => self.usuario}.to_json
+         "rutinaDeCarga" => self.rutinaDeCarga, "idUsuario" => self.idUsuario}.to_json
     end
 end
