@@ -26,6 +26,10 @@ FitnessTimeApi::App.helpers do
     rutina.rutinaDeCarga = jsonRutina['esDeCarga']
     rutina.estaSincronizado = true
     rutina.usuario = usuario
+    #lista = Array.new(jsonRutina['ejercicioList'].size)
+    #jsonRutina['ejercicioList'].each do |child|
+    #  ejercicio = E
+    #end
     return rutina
   end
 
