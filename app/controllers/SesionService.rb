@@ -8,7 +8,8 @@ FitnessTimeApi::App.controllers :sesionService do
       if(usuario.is_the_same_password?(params[:pass]))
         securityToken = SecurityToken.new(usuario.email,usuario.nombre,generate_random)
         securityToken.save()
-        get_success_response(securityToken.to_json)
+        get_success_response({"nombreUsuario":securityToken.nombreUsuario, "emailUsuario":securityToken.emailUsuario, "authToken":securityToken.authToken, "imagenPerfil":""}.to_json)
+        #get_success_response(securityToken.to_json)
       else
         get_error_response(404, "La contrasenia es incorrecta.")
       end
