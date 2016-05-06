@@ -9,7 +9,6 @@ FitnessTimeApi::App.controllers :rutinaService do
     else
       begin
         rutina = create_rutina(params)
-        rutina.save!()
         assembler = RutinaAssembler.new
         rutinaDTO = assembler.crear_dto(rutina)
         get_success_response(rutinaDTO.to_json)

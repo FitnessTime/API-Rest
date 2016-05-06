@@ -13,7 +13,7 @@ class RutinaAssembler
         rutinaDTO.versionWeb = rutina.version
         rutinaDTO.versionMobile = rutina.versionMobile
         rutinaDTO.estaSincronizado = rutina.estaSincronizado
-        rutinaDTO.rutinaDeCarga = rutina.rutinaDeCarga
+        rutinaDTO.esDeCarga = rutina.esDeCarga
         rutinaDTO.idUsuario = rutina.usuario.email
         return rutinaDTO
     end

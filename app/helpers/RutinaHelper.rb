@@ -23,13 +23,14 @@ FitnessTimeApi::App.helpers do
   	rutina.fin = jsonRutina['fin']
     rutina.descripcion = jsonRutina['descripcion']
     rutina.aclaracion = jsonRutina['aclaracion']
-    rutina.rutinaDeCarga = jsonRutina['esDeCarga']
+    rutina.esDeCarga = jsonRutina['esDeCarga']
     rutina.estaSincronizado = true
     rutina.usuario = usuario
-    #lista = Array.new(jsonRutina['ejercicioList'].size)
-    #jsonRutina['ejercicioList'].each do |child|
-    #  ejercicio = E
-    #end
+    lista = Array.new(jsonRutina['ejercicioList'].size)
+    jsonRutina['ejercicio'].each do |ejercicio|
+      ejer = crear_ejercicio(ejercicio, rutina)
+    end
+    rutina.save!()
     return rutina
   end
 

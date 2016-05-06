@@ -10,7 +10,7 @@ class Rutina
     property :version, Integer , :default => 0
     property :versionMobile, Integer , :default => 0
     property :estaSincronizado, Boolean, :default => false
-    property :rutinaDeCarga, Boolean
+    property :esDeCarga, Boolean
     has n, :ejercicios, :through => Resource
     belongs_to :usuario
 

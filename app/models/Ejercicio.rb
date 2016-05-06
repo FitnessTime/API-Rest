@@ -6,6 +6,6 @@ class Ejercicio
 	property :type, Discriminator, :key => true
   	property :nombre, String
   	property :series, Integer
-  	property :dia_de_entrenamiento, String
+  	property :diaDeLaSemana, String
 	belongs_to :rutina
 end

@@ -6,6 +6,12 @@ FitnessTimeApi::App.helpers do
     			   :fechaNacimiento => params[:fecha], :peso => params[:peso])
   end
 
+  def cambiar_contrasenia(params)
+      @usuario = Usuario.find_by_email(params[:email])
+      pass = ::BCrypt::Password.create(params[:nuevaPass]) unless params[:nuevaPass].nil?
+      @usuario.update(:crypted_password => pass)
+  end
+
   def create_usuario(params)
     jsonUsuario = JSON.parse(params[:usuario])
     usuario = Usuario.new
