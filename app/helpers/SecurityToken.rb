@@ -7,11 +7,13 @@ class SecurityToken
 	property :emailUsuario, String
 	property :nombreUsuario, String
 	property :authToken, String
+	property :imagenPerfil, String
 
-	def initialize(emailUsuario, nombreUsuario, authToken)
+	def initialize(emailUsuario, nombreUsuario, authToken, imagenPerfil)
 		self.nombreUsuario = nombreUsuario
 		self.emailUsuario = emailUsuario
 		self.authToken = authToken
+		self.imagenPerfil = imagenPerfil
 	end
 
   	def self.json_create(o)

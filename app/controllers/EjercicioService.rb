@@ -1,10 +1,15 @@
 FitnessTimeApi::App.controllers :ejercicioService do
 
-  post :registrarEjercicio, :map => '/rutinas/:rutina_id/ejercicios' do
-    # Verificamos que se pueda realizar la operacion
-    @ejercicio = create_ejercicio(params)
-    @ejercicio.save()
-    #Comunicamos el resultado de la operacion y mandamos el json
+  post :registrarEjercicio, :map => '/ejercicios' do
+    securityToken = SecurityToken.find_by_authToken(params[:authToken])
+    if securityToken == nil
+      get_error_response(404,"Usuario no autorizado.")
+    else
+      jsonEjercicio = JSON.parse(params[:ejercicio])
+      rutina = Rutina.find_by_id(params[:idRutina])
+      ejercicio = create_ejercicio(jsonEjercicio,rutina)
+      
+    end
   end
 
   get :ejercicios, :map => '/rutinas/:rutina_id/ejercicios' do

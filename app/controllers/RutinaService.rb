@@ -29,21 +29,60 @@ FitnessTimeApi::App.controllers :rutinaService do
       end
   end
 
-  put :editarRutina, :map => '/rutinas/:rutina_id' do
-    @rutina = Rutina.get(params[:rutina_id])
-    actualizar_rutina(@rutina,params)
-    #Comunicamos el resultado de la operacion y mandamos el json
+  put :editarRutina, :map => '/rutinas' do
+    securityToken = SecurityToken.find_by_authToken(params[:authToken])
+    if securityToken == nil
+      get_error_response(404,"Usuario no autorizado.")
+    else
+      jsonRutina = JSON.parse(params[:rutina])
+      rutina_actualizada = actualizar_rutina(jsonRutina)
+      assembler = RutinaAssembler.new
+      rutinaDTO = assembler.crear_dto(rutina_actualizada)
+      get_success_response(rutinaDTO.to_json)
+    end
   end
 
-  delete :eliminarRutina, :map => '/rutinas/:rutina_id' do
-    @rutina = Rutina.get(params[:rutina_id])
-    @rutina.destroy!()
-    #Comunicamos el resultado de la operacion y mandamos el json
+  delete :eliminarRutina, :map => '/rutinas' do
+    securityToken = SecurityToken.find_by_authToken(params[:authToken])
+    if securityToken == nil
+      get_error_response(404,"Usuario no autorizado.")
+    else
+      rutina = Rutina.find_by_id(params[:id])
+      rutina.update(:eliminada => true)
+      get_success_response("Rutina eliminada con exito.")
+    end
   end
 
   get :consultar, :map => '/rutinas/:rutina_id' do
     @rutina = Rutina.get(params[:rutina_id])
-    #Comunicamos el resultado de la operaicon y mandamos el json
+  end
+
+  get :sincronizar, :map => '/rutinas/sincronizar' do
+    securityToken = SecurityToken.find_by_authToken(params[:authToken])
+    if securityToken == nil
+      get_error_response(404,"Usuario no autorizado.")
+    else
+      lista = Array.new(params[:rutinas].size)
+      index = 0
+      assembler = RutinaAssembler.new
+      params[:rutinas].each do |rutinaMobile|
+        rutinaWeb = Rutina.find_by_id(rutinaMobile['idWeb'])
+        if(rutinaWeb == nil)
+          create_rutina(params)
+        else
+          if(rutinaWeb.version > rutinaMobile.versionWeb)
+            lista[index] = assembler.crear_dto(rutinaWeb)
+          else
+            if(rutinaWeb.version == rutinaMobile.versionWeb && rutinaWeb.versionMobile < rutinaMobile.versionMobile)
+              actualizar_rutina
+            else
+
+            end
+          end
+        end
+        index = index + 1
+      end
+    end
   end
 
 end
