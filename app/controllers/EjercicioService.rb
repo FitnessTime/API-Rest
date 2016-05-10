@@ -8,7 +8,6 @@ FitnessTimeApi::App.controllers :ejercicioService do
       jsonEjercicio = JSON.parse(params[:ejercicio])
       rutina = Rutina.find_by_id(params[:idRutina])
       ejercicio = create_ejercicio(jsonEjercicio,rutina)
-      
     end
   end
 
