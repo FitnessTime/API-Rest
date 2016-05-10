@@ -7,7 +7,7 @@ FitnessTimeApi::App.helpers do
     versionWeb = rutina.version + 1
     rutina.update(:inicio => jsonRutina['inicio'], :fin => jsonRutina['fin'],
     			        :descripcion => jsonRutina['descripcion'], :aclaracion => jsonRutina['aclaracion'],
-                  :versionMobile => jsonRutina['versionMobile'], :version => versionWeb)
+                  :versionMobile => jsonRutina['versionMobile'], :version => versionWeb, :estaSincronizado => true)
     return rutina
   end
 
