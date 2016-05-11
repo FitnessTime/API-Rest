@@ -48,8 +48,10 @@ FitnessTimeApi::App.controllers :rutinaService do
       get_error_response(404,"Usuario no autorizado.")
     else
       rutina = Rutina.find_by_id(params[:id])
-      rutina.update(:eliminada => true)
-      get_success_response("Rutina eliminada con exito.")
+      rutina.update(:eliminada => true, :estaSincronizado => true)
+      assembler = RutinaAssembler.new
+      rutinaDTO = assembler.crear_dto(rutina)
+      get_success_response(rutinaDTO.to_json)
     end
   end
 

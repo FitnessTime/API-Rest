@@ -30,4 +30,5 @@ FitnessTimeApi::App.helpers do
     rutina.save!()
     return rutina
   end
+
 end
