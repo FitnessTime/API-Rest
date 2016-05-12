@@ -11,8 +11,7 @@ FitnessTimeApi::App.helpers do
     return rutina
   end
 
-  def create_rutina(params)
-    jsonRutina = JSON.parse(params[:rutina])
+  def create_rutina(jsonRutina)
     usuario = Usuario.find_by_email(jsonRutina['idUsuario'])
     rutina = Rutina.new()
     rutina.idMobile = jsonRutina['idMobile']

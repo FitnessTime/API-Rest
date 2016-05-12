@@ -8,7 +8,8 @@ FitnessTimeApi::App.controllers :rutinaService do
       get_error_response(413,'Usuario no autorizado.')
     else
       begin
-        rutina = create_rutina(params)
+        jsonRutina = JSON.parse(params[:rutina])
+        rutina = create_rutina(jsonRutina)
         assembler = RutinaAssembler.new
         rutinaDTO = assembler.crear_dto(rutina)
         get_success_response(rutinaDTO.to_json)
@@ -59,24 +60,26 @@ FitnessTimeApi::App.controllers :rutinaService do
     @rutina = Rutina.get(params[:rutina_id])
   end
 
-  get :sincronizar, :map => '/rutinas/sincronizar' do
+  get :sincronizar, :map => '/rutinaSinc' do
     securityToken = SecurityToken.find_by_authToken(params[:authToken])
     if securityToken == nil
       get_error_response(404,"Usuario no autorizado.")
     else
-      lista = Array.new(params[:rutinas].size)
+      
       index = 0
       assembler = RutinaAssembler.new
-      params[:rutinas].each do |rutinaMobile|
-        rutinaWeb = Rutina.find_by_id(rutinaMobile['idWeb'])
-        if(rutinaWeb == nil)
-          create_rutina(params)
+      rutinas = JSON.parse(params[:rutinas])
+      lista = Array.new(rutinas.size)
+      rutinas.each do |rutinaMobile|
+        #rutinaWeb = Rutina.find_by_id(rutinaMobile['idWeb'])
+        if(rutinaMobile['idWeb'] == nil)
+          lista[index] = create_rutina(rutinaMobile)
         else
           if(rutinaWeb.version > rutinaMobile.versionWeb)
             lista[index] = assembler.crear_dto(rutinaWeb)
           else
             if(rutinaWeb.version == rutinaMobile.versionWeb && rutinaWeb.versionMobile < rutinaMobile.versionMobile)
-              actualizar_rutina
+              
             else
 
             end
@@ -84,6 +87,7 @@ FitnessTimeApi::App.controllers :rutinaService do
         end
         index = index + 1
       end
+      get_success_response(lista.to_json)
     end
   end
 
