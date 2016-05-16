@@ -16,6 +16,10 @@ class RutinaAssembler
         rutinaDTO.esDeCarga = rutina.esDeCarga
         rutinaDTO.eliminada = rutina.eliminada
         rutinaDTO.idUsuario = rutina.usuario.email
+        rutinaDTO.inicioCambio = rutina.inicioCambio
+        rutinaDTO.finCambio = rutina.finCambio
+        rutinaDTO.descripcionCambio = rutina.descripcionCambio
+        rutinaDTO.aclaracionCambio = rutina.aclaracionCambio
         return rutinaDTO
     end
 end

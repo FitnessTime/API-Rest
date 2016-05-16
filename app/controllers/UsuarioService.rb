@@ -8,7 +8,7 @@ FitnessTimeApi::App.controllers :usuarioService do
       enviar_mail_bienvenida(usuario.email, usuario.email, jsonUsuario['password'])
       get_success_response("Usuario creado con exito.")
     rescue Exception
-      get_error_response(410,'Ya existe un usuario con esta cuenta.')
+      get_error_response(404,"Ya existe un usuario con esta cuenta.")
     end
   end
 

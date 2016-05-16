@@ -12,9 +12,9 @@ class Usuario
 	property :diasDeEntrenamiento, Integer, :default => 0
 	property :minimoDePasosDiarios, Integer, :default => 0
 	property :minimoDeKilometrosRecorridos, Integer, :default => 0
-	has n, :rutina, :through => Resource
-	has n, :paso, :through => Resource
-	has n, :kilometros, :through => Resource
+	has n, :rutinas
+	has n, :pasos
+	has n, :kilometros
 
 	validates_presence_of :nombre
 	validates_presence_of :crypted_password

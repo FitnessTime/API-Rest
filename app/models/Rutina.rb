@@ -12,6 +12,10 @@ class Rutina
     property :estaSincronizado, Boolean, :default => false
     property :esDeCarga, Boolean
     property :eliminada, Boolean
+    property :inicioCambio, Boolean, :default => false
+    property :finCambio, Boolean, :default => false
+    property :descripcionCambio, Boolean, :default => false
+    property :aclaracionCambio, Boolean, :default => false
     has n, :ejercicios, :through => Resource
     belongs_to :usuario
 
