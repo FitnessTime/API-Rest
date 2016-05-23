@@ -3,6 +3,7 @@ require_relative '../DTOs/RutinaDTO.rb'
 class RutinaAssembler
 
 	def crear_dto (rutina)
+        
         rutinaDTO = RutinaDTO.new
         rutinaDTO.idWeb = rutina.id
        	rutinaDTO.idMobile = rutina.idMobile

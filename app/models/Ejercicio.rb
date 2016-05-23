@@ -12,5 +12,10 @@ class Ejercicio
   	property :eliminada, Boolean, :default => false
   	property :version, Integer , :default => 0
     property :versionMobile, Integer , :default => 0
-	belongs_to :rutina
+    property :nombreCambio, Boolean
+    property :diaDeLaSemanaCambio, Boolean
+    property :seriesCambio, Boolean
+    property :tiempoActivoCambio, Boolean
+    property :tiempoDescansoCambio, Boolean
+	  belongs_to :rutina
 end

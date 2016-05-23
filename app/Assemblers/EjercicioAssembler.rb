@@ -2,20 +2,34 @@ require_relative '../DTOs/EjercicioDTO.rb'
 
 class EjercicioAssembler
 
-	def crear_dto (ejercicio)
-        ejercicioDTO = RutinaDTO.new
+	def crear_dto (ejercicio, esDeCarga)
+        ejercicioDTO = EjercicioDTO.new
         ejercicioDTO.idWeb = ejercicio.id
        	ejercicioDTO.idMobile = ejercicio.idMobile
-        ejercicioDTO.inicio = ejercicio.inicio
-        ejercicioDTO.fin = ejercicio.fin
-        ejercicioDTO.descripcion = ejercicio.descripcion
-        ejercicioDTO.aclaracion = ejercicio.aclaracion
+        ejercicioDTO.nombre = ejercicio.nombre
+        ejercicioDTO.diaDeLaSemana = ejercicio.diaDeLaSemana
+        ejercicioDTO.series = ejercicio.series
+        if (esDeCarga) 
+            ejercicioDTO.repeticiones = ejercicio.repeticiones 
+            ejercicioDTO.tiempoActivo = nil
+            ejercicioDTO.tiempoDescanso = nil
+        else 
+            ejercicioDTO.repeticiones = nil 
+            ejercicioDTO.tiempoActivo = ejercicio.tiempoActivo
+            ejercicioDTO.tiempoDescanso = ejercicio.tiempoDescanso
+        end
+        ejercicioDTO.nombreCambio = ejercicio.nombreCambio
+        ejercicioDTO.diaDeLaSemanaCambio = ejercicio.diaDeLaSemanaCambio
+        ejercicioDTO.seriesCambio = ejercicio.seriesCambio
+        ejercicioDTO.repeticionesCambio = ejercicio.repeticionesCambio
+        ejercicioDTO.tiempoActivoCambio = ejercicio.tiempoActivoCambio
+        ejercicioDTO.tiempoDescansoCambio = ejercicio.tiempoDescansoCambio
         ejercicioDTO.versionWeb = ejercicio.version
         ejercicioDTO.versionMobile = ejercicio.versionMobile
         ejercicioDTO.estaSincronizado = ejercicio.estaSincronizado
-        ejercicioDTO.esDeCarga = ejercicio.esDeCarga
+        ejercicioDTO.esDeCarga = esDeCarga
         ejercicioDTO.eliminada = ejercicio.eliminada
-        ejercicioDTO.idUsuario = ejercicio.usuario.email
+        ejercicioDTO.idRutina = ejercicio.rutina.id
         return ejercicioDTO
     end
 end
