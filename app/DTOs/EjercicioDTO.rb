@@ -21,7 +21,7 @@ class EjercicioDTO
     attr_accessor :diaDeLaSemanaCambio
     attr_accessor :idRutina
 
-    def to_json()
+    def to_json(j)
         {"idWeb" => self.idWeb, "idMobile" => self.idMobile, "nombre" => self.nombre, "series" => self.series,
          "repeticiones" => self.repeticiones, "tiempoActivo" => self.tiempoActivo, "tiempoDescanso" => self.tiempoDescanso,
          "versionWeb" => self.versionWeb, "versionMobile" => self.versionMobile, "diaDeLaSemana" => self.diaDeLaSemana,
@@ -29,6 +29,6 @@ class EjercicioDTO
          "eliminada" => self.eliminada , "nombreCambio" => self.nombreCambio,
          "seriesCambio" => self.seriesCambio, "repeticionesCambio" => self.repeticionesCambio,
          "tiempoActivoCambio" => self.tiempoActivoCambio, "tiempoDescansoCambio" => self.tiempoDescansoCambio,
-         "diaDeLaSemanaCambio" => self.diaDeLaSemanaCambio, "idRutina" => self.idRutina}
+         "diaDeLaSemanaCambio" => self.diaDeLaSemanaCambio, "idRutina" => self.idRutina}.to_json
     end
 end

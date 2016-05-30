@@ -12,7 +12,7 @@ FitnessTimeApi::App.controllers :rutinaService do
         rutina = create_rutina(jsonRutina)
         assembler = RutinaAssembler.new
         rutinaDTO = assembler.crear_dto(rutina)
-        get_success_response(rutinaDTO.to_json)
+        get_success_response(rutinaDTO.to_json(''))
       rescue DataMapper::SaveFailureError
         get_error_response(404,'No se pudo crear la rutina')
       end
@@ -24,7 +24,7 @@ FitnessTimeApi::App.controllers :rutinaService do
       if securityToken == nil
         get_error_response(404,"Usuario no autorizado.")
       else
-        get_success_response(retornar_rutinas_dto(securityToken))
+        get_success_response(retornar_rutinas_dto(securityToken).to_json)
       end
   end
 
@@ -37,7 +37,7 @@ FitnessTimeApi::App.controllers :rutinaService do
       rutina_actualizada = actualizar_rutina(jsonRutina)
       assembler = RutinaAssembler.new
       rutinaDTO = assembler.crear_dto(rutina_actualizada)
-      get_success_response(rutinaDTO.to_json)
+      get_success_response(rutinaDTO.to_json(''))
     end
   end
 
@@ -47,7 +47,7 @@ FitnessTimeApi::App.controllers :rutinaService do
       get_error_response(404,"Usuario no autorizado.")
     else
       rutinaDTO = elimiar_rutina(params)
-      get_success_response(rutinaDTO.to_json)
+      get_success_response(rutinaDTO.to_json(''))
     end
   end
 
@@ -62,7 +62,7 @@ FitnessTimeApi::App.controllers :rutinaService do
     else
       rutinas = JSON.parse(params[:rutinas])
       sincronizar_rutinas(rutinas)
-      get_success_response(retornar_rutinas_dto(securityToken))
+      get_success_response(retornar_rutinas_dto(securityToken).to_json)
     end
   end
 

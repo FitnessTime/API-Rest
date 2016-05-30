@@ -30,7 +30,7 @@ FitnessTimeApi::App.controllers :ejercicioService do
       ejercicio_actualizado = actualizar_ejercicio(jsonEjercicio)
       assembler = EjercicioAssembler.new
       ejercicioDTO = assembler.crear_dto(ejercicio_actualizado, jsonEjercicio['esDeCarga'])
-      get_success_response(ejercicioDTO.to_json)
+      get_success_response(ejercicioDTO.to_json(''))
     end
   end
 
@@ -45,7 +45,7 @@ FitnessTimeApi::App.controllers :ejercicioService do
       ejercicio.update(:eliminada => true, :estaSincronizado => true)
       assembler = EjercicioAssembler.new
       ejercicioDTO = assembler.crear_dto(ejercicio,params[:esDeCarga])
-      get_success_response(ejercicioDTO.to_json)
+      get_success_response(ejercicioDTO.to_json(''))
     end
   end
 end

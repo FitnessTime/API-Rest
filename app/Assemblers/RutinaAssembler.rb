@@ -26,7 +26,7 @@ class RutinaAssembler
         assembler = EjercicioAssembler.new
         index = 0
         rutina.ejercicios.each do |ejercicio|
-            ejerciciosDto[index] = assembler.crear_dto(ejercicio,rutina.esDeCarga).to_json
+            ejerciciosDto[index] = assembler.crear_dto(ejercicio,rutina.esDeCarga)
             index = index + 1
         end
 

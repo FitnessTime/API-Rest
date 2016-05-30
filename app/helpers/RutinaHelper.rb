@@ -53,7 +53,7 @@ FitnessTimeApi::App.helpers do
     assembler = RutinaAssembler.new
     index = 0
     rutinas.each do |rutina|
-      ret_rutinas_dto[index] = assembler.crear_dto(rutina).to_json
+      ret_rutinas_dto[index] = assembler.crear_dto(rutina)
       index = index + 1
     end
     return ret_rutinas_dto
