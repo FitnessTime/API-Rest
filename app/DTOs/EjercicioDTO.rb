@@ -29,6 +29,6 @@ class EjercicioDTO
          "eliminada" => self.eliminada , "nombreCambio" => self.nombreCambio,
          "seriesCambio" => self.seriesCambio, "repeticionesCambio" => self.repeticionesCambio,
          "tiempoActivoCambio" => self.tiempoActivoCambio, "tiempoDescansoCambio" => self.tiempoDescansoCambio,
-         "diaDeLaSemanaCambio" => self.diaDeLaSemanaCambio, "idRutina" => self.idRutina}.to_json
+         "diaDeLaSemanaCambio" => self.diaDeLaSemanaCambio, "idRutina" => self.idRutina}
     end
 end

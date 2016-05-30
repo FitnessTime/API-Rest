@@ -17,6 +17,7 @@ class RutinaDTO
     attr_accessor :esDeCarga
     attr_accessor :eliminada
     attr_accessor :idUsuario
+    attr_accessor :ejerciciosDTO
 
     def to_json()
         {"idWeb" => self.idWeb, "idMobile" => self.idMobile, "inicio" => self.inicio, "fin" => self.fin,
@@ -24,6 +25,7 @@ class RutinaDTO
          "versionMobile" => self.versionMobile, "estaSincronizado" => self.estaSincronizado,
          "esDeCarga" => self.esDeCarga, "eliminada" => self.eliminada ,"idUsuario" => self.idUsuario,
          "inicioCambio" => self.inicioCambio, "finCambio" => self.finCambio,
-         "aclaracionCambio" => self.aclaracionCambio, "descripcionCambio" => self.descripcionCambio}.to_json
+         "aclaracionCambio" => self.aclaracionCambio, "descripcionCambio" => self.descripcionCambio,
+         "ejercicios" => self.ejerciciosDTO}.to_json
     end
 end

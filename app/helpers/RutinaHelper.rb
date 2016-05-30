@@ -39,8 +39,16 @@ FitnessTimeApi::App.helpers do
     return rutina
   end
 
+  def eliminar_rutina(params)
+    rutina = Rutina.find_by_id(params[:id])
+    rutina.update(:eliminada => true, :estaSincronizado => true)
+    assembler = RutinaAssembler.new
+    rutinaDTO = assembler.crear_dto(rutina)
+    return rutinaDTO
+  end
+
   def retornar_rutinas_dto(securityToken)
-    rutinas = Rutina.find_all_by_usuario_email(securityToken.emailUsuario)
+    rutinas = Rutina.find_all_by_usuario_email(securityToken.emailUsuario, :include => [:ejercicios])
     ret_rutinas_dto = Array.new(rutinas.size)
     assembler = RutinaAssembler.new
     index = 0
@@ -48,7 +56,7 @@ FitnessTimeApi::App.helpers do
       ret_rutinas_dto[index] = assembler.crear_dto(rutina).to_json
       index = index + 1
     end
-    return ret_rutinas_dto.to_json
+    return ret_rutinas_dto
   end
 
   def merge_rutina(rutinaMobile)
@@ -67,5 +75,21 @@ FitnessTimeApi::App.helpers do
     end
     rutinaWeb.update(:finCambio => false, :inicioCambio => false, :aclaracionCambio => false,
                      :descripcionCambio => false)
+  end
+
+  def sincronizar_rutinas(jsonRutinas)
+    jsonRutinas.each do |rutinaMobile|
+      if(rutinaMobile['idWeb'] == nil)
+        create_rutina(rutinaMobile)
+      else
+        rutinaWeb = Rutina.find_by_id(rutinaMobile['idWeb'])
+        if(rutinaWeb.version > rutinaMobile['versionWeb'])
+          merge_rutina(rutinaMobile)
+        else
+          actualizar_rutina(rutinaMobile)
+        end
+      end
+      sincronizar_ejercicios(rutinaMobile['ejercicios'], rutinaWeb)
+    end  
   end
 end

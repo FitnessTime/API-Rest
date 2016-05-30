@@ -24,9 +24,7 @@ FitnessTimeApi::App.controllers :rutinaService do
       if securityToken == nil
         get_error_response(404,"Usuario no autorizado.")
       else
-        usuario = Usuario.find_by_email(securityToken.emailUsuario)
-        rutinas = Rutina.find_all_by_usuario(usuario)
-        get_success_response(rutinas.to_json)
+        get_success_response(retornar_rutinas_dto(securityToken))
       end
   end
 
@@ -48,10 +46,7 @@ FitnessTimeApi::App.controllers :rutinaService do
     if securityToken == nil
       get_error_response(404,"Usuario no autorizado.")
     else
-      rutina = Rutina.find_by_id(params[:id])
-      rutina.update(:eliminada => true, :estaSincronizado => true)
-      assembler = RutinaAssembler.new
-      rutinaDTO = assembler.crear_dto(rutina)
+      rutinaDTO = elimiar_rutina(params)
       get_success_response(rutinaDTO.to_json)
     end
   end
@@ -65,20 +60,8 @@ FitnessTimeApi::App.controllers :rutinaService do
     if securityToken == nil
       get_error_response(404,"Usuario no autorizado.")
     else
-      assembler = RutinaAssembler.new
       rutinas = JSON.parse(params[:rutinas])
-      rutinas.each do |rutinaMobile|
-        if(rutinaMobile['idWeb'] == nil)
-          create_rutina(rutinaMobile)
-        else
-          rutinaWeb = Rutina.find_by_id(rutinaMobile['idWeb'])
-          if(rutinaWeb.version > rutinaMobile['versionWeb'])
-            merge_rutina(rutinaMobile)
-          else
-            actualizar_rutina(rutinaMobile)
-          end
-        end
-      end
+      sincronizar_rutinas(rutinas)
       get_success_response(retornar_rutinas_dto(securityToken))
     end
   end

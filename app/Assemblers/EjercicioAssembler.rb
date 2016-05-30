@@ -2,14 +2,14 @@ require_relative '../DTOs/EjercicioDTO.rb'
 
 class EjercicioAssembler
 
-	def crear_dto (ejercicio, esDeCarga)
+	def crear_dto (ejercicio, carga)
         ejercicioDTO = EjercicioDTO.new
         ejercicioDTO.idWeb = ejercicio.id
        	ejercicioDTO.idMobile = ejercicio.idMobile
         ejercicioDTO.nombre = ejercicio.nombre
         ejercicioDTO.diaDeLaSemana = ejercicio.diaDeLaSemana
         ejercicioDTO.series = ejercicio.series
-        if (esDeCarga) 
+        if(carga) 
             ejercicioDTO.repeticiones = ejercicio.repeticiones 
             ejercicioDTO.tiempoActivo = nil
             ejercicioDTO.tiempoDescanso = nil
@@ -27,7 +27,7 @@ class EjercicioAssembler
         ejercicioDTO.versionWeb = ejercicio.version
         ejercicioDTO.versionMobile = ejercicio.versionMobile
         ejercicioDTO.estaSincronizado = ejercicio.estaSincronizado
-        ejercicioDTO.esDeCarga = esDeCarga
+        ejercicioDTO.esDeCarga = carga
         ejercicioDTO.eliminada = ejercicio.eliminada
         ejercicioDTO.idRutina = ejercicio.rutina.id
         return ejercicioDTO

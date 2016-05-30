@@ -16,7 +16,7 @@ class Rutina
     property :finCambio, Boolean, :default => false
     property :descripcionCambio, Boolean, :default => false
     property :aclaracionCambio, Boolean, :default => false
-    has n, :ejercicios, :through => Resource
+    has n, :ejercicios
     belongs_to :usuario
 
 end

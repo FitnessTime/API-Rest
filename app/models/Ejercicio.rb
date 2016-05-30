@@ -12,10 +12,12 @@ class Ejercicio
   	property :eliminada, Boolean, :default => false
   	property :version, Integer , :default => 0
     property :versionMobile, Integer , :default => 0
-    property :nombreCambio, Boolean
-    property :diaDeLaSemanaCambio, Boolean
-    property :seriesCambio, Boolean
-    property :tiempoActivoCambio, Boolean
-    property :tiempoDescansoCambio, Boolean
+    property :nombreCambio, Boolean, :default => false
+    property :diaDeLaSemanaCambio, Boolean, :default => false
+    property :seriesCambio, Boolean, :default => false
+    property :repeticionesCambio, Boolean, :default => false
+    property :tiempoActivoCambio, Boolean, :default => false
+    property :tiempoDescansoCambio, Boolean, :default => false
+    has n, :marcas
 	  belongs_to :rutina
 end
