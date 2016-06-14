@@ -73,7 +73,8 @@ FitnessTimeApi::App.helpers do
     end
     
     ejercicioWeb.update(:nombreCambio => false, :diaDeLaSemanaCambio => false, :seriesCambio => false,
-                        :repeticionesCambio => false, :tiempoActivoCambio => false, :tiempoDescansoCambio => false)
+                        :repeticionesCambio => false, :tiempoActivoCambio => false,
+                        :tiempoDescansoCambio => false, :estaSincronizado => true)
   end
 
   def sincronizar_ejercicios(jsonEjercicios, rutina)

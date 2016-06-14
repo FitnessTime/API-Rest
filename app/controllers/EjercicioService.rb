@@ -8,7 +8,8 @@ FitnessTimeApi::App.controllers :ejercicioService do
       get_error_response(404,"Usuario no autorizado.")
     else
       jsonEjercicio = JSON.parse(params[:ejercicio])
-      ejercicio = create_ejercicio(jsonEjercicio)
+      rutina = Rutina.find_by_id(jsonEjercicio['idRutina'])
+      ejercicio = create_ejercicio(jsonEjercicio, rutina)
     end
   end
 

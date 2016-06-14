@@ -74,7 +74,7 @@ FitnessTimeApi::App.helpers do
       rutinaWeb.update(:descripcion => rutinaMobile['descripcion'])
     end
     rutinaWeb.update(:finCambio => false, :inicioCambio => false, :aclaracionCambio => false,
-                     :descripcionCambio => false)
+                     :descripcionCambio => false, :estaSincronizado => true)
   end
 
   def sincronizar_rutinas(jsonRutinas)
