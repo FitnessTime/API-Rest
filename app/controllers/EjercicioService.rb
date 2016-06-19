@@ -1,5 +1,6 @@
 require_relative '../Assemblers/EjercicioAssembler.rb'
 
+
 FitnessTimeApi::App.controllers :ejercicioService do
 
   post :registrarEjercicio, :map => '/ejercicios' do

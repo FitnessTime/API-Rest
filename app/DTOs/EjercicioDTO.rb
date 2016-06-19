@@ -19,7 +19,6 @@ class EjercicioDTO
     attr_accessor :tiempoActivoCambio
     attr_accessor :tiempoDescansoCambio
     attr_accessor :diaDeLaSemanaCambio
-    attr_accessor :marcasDTO
     attr_accessor :idRutina
 
     def to_json(j)
@@ -30,7 +29,6 @@ class EjercicioDTO
          "eliminada" => self.eliminada , "nombreCambio" => self.nombreCambio,
          "seriesCambio" => self.seriesCambio, "repeticionesCambio" => self.repeticionesCambio,
          "tiempoActivoCambio" => self.tiempoActivoCambio, "tiempoDescansoCambio" => self.tiempoDescansoCambio,
-         "diaDeLaSemanaCambio" => self.diaDeLaSemanaCambio, "idRutina" => self.idRutina,
-         "marcas" => self.marcasDTO}.to_json
+         "diaDeLaSemanaCambio" => self.diaDeLaSemanaCambio, "idRutina" => self.idRutina}.to_json
     end
 end

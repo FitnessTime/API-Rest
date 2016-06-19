@@ -31,16 +31,6 @@ class EjercicioAssembler
         ejercicioDTO.eliminada = ejercicio.eliminada
         ejercicioDTO.idRutina = ejercicio.rutina.id
 
-        marcasDto = Array.new(ejercicio.marcas.size)
-        assembler = MarcaAssembler.new
-        index = 0
-        ejercicio.marcas.each do |marca|
-            marcasDto[index] = assembler.crear_dto(marca)
-            index = index + 1
-        end
-
-        ejercicioDTO.marcasDTO = marcasDto
-
         return ejercicioDTO
     end
 end

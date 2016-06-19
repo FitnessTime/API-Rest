@@ -1,3 +1,5 @@
+require_relative '../Assemblers/MarcaAssembler.rb'
+
 FitnessTimeApi::App.controllers :marcaService do
   
   post :registrarMarca, :map => '/marcas' do
@@ -7,7 +9,7 @@ FitnessTimeApi::App.controllers :marcaService do
     else
       jsonMarca = JSON.parse(params[:marca])
       ejercicio = EjercicioDeCarga.find_by_id(jsonMarca['idEjercicio'])
-      ejercicio = create_ejercicio(jsonMarca, ejercicio)
+      marca = create_marca(jsonMarca, ejercicio)
     end
   end
 
