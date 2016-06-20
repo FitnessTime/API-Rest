@@ -42,6 +42,14 @@ FitnessTimeApi::App.helpers do
     ejercicio.estaSincronizado = true
     ejercicio.idMobile = jsonEjercicio['idMobile']
     ejercicio.eliminada = jsonEjercicio['eliminada']
+    ejercicio.version = 0
+    ejercicio.versionMobile = jsonEjercicio['versionMobile']
+    ejercicio.nombreCambio = jsonEjercicio['nombreCambio']
+    ejercicio.diaDeLaSemanaCambio = jsonEjercicio['diaDeLaSemanaCambio']
+    ejercicio.seriesCambio = jsonEjercicio['seriesCambio']
+    ejercicio.repeticionesCambio = jsonEjercicio['repeticionesCambio']
+    ejercicio.tiempoActivoCambio = jsonEjercicio['tiempoActivoCambio']
+    ejercicio.tiempoDescansoCambio = jsonEjercicio['tiempoDescansoCambio']
   	ejercicio.rutina = rutina
   	ejercicio.save()
     return ejercicio

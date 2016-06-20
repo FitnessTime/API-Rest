@@ -11,9 +11,9 @@ FitnessTimeApi::App.controllers :ejercicioService do
       begin
         jsonEjercicio = JSON.parse(params[:ejercicio])
       rutina = Rutina.find_by_id(jsonEjercicio['idRutina'])
-      ejercicio = create_ejercicio(jsonEjercicio, rutina)
+      ejercicio = crear_ejercicio(jsonEjercicio, rutina)
       assembler = EjercicioAssembler.new
-      ejercicioDTO = assembler.crear_dto(ejercicio, ejercicio.esDeCarga)
+      ejercicioDTO = assembler.crear_dto(ejercicio, rutina.esDeCarga)
       get_success_response(ejercicioDTO.to_json(''))
       rescue DataMapper::SaveFailureError
         get_error_response(404,'No se pudo crear el ejercicio')
