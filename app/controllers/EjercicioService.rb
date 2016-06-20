@@ -44,8 +44,6 @@ FitnessTimeApi::App.controllers :ejercicioService do
   end
 
   delete :eliminar, :map => '/ejercicios' do
-    @rutina = Rutina.get(params[:idEjercicio])
-    @rutina.destroy()
     securityToken = SecurityToken.find_by_authToken(params[:authToken])
     if securityToken == nil
       get_error_response(404,"Usuario no autorizado.")
@@ -53,7 +51,7 @@ FitnessTimeApi::App.controllers :ejercicioService do
       ejercicio = Ejercicio.find_by_id(params[:id])
       ejercicio.update(:eliminada => true, :estaSincronizado => true)
       assembler = EjercicioAssembler.new
-      ejercicioDTO = assembler.crear_dto(ejercicio,params[:esDeCarga])
+      ejercicioDTO = assembler.crear_dto(ejercicio,ejercicio.esDeCarga)
       get_success_response(ejercicioDTO.to_json(''))
     end
   end
