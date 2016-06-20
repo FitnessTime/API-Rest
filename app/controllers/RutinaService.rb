@@ -46,7 +46,7 @@ FitnessTimeApi::App.controllers :rutinaService do
     if securityToken == nil
       get_error_response(404,"Usuario no autorizado.")
     else
-      rutinaDTO = elimiar_rutina(params)
+      rutinaDTO = eliminar_rutina(params)
       get_success_response(rutinaDTO.to_json(''))
     end
   end

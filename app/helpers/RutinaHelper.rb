@@ -42,13 +42,18 @@ FitnessTimeApi::App.helpers do
   def eliminar_rutina(params)
     rutina = Rutina.find_by_id(params[:id])
     rutina.update(:eliminada => true, :estaSincronizado => true)
+    if(rutina.ejercicios != nil)
+      rutina.ejercicios.each do |ejercicio|
+        eliminar_ejercicio(ejercicio)
+      end
+    end
     assembler = RutinaAssembler.new
     rutinaDTO = assembler.crear_dto(rutina)
     return rutinaDTO
   end
 
   def retornar_rutinas_dto(securityToken)
-    rutinas = Rutina.find_all_by_usuario_email(securityToken.emailUsuario, :include => [:ejercicios])
+    rutinas = Rutina.find_all_by_usuario_email_and_eliminada(securityToken.emailUsuario, false)
     ret_rutinas_dto = Array.new(rutinas.size)
     assembler = RutinaAssembler.new
     index = 0

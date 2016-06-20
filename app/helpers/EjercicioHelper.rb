@@ -55,6 +55,10 @@ FitnessTimeApi::App.helpers do
     return ejercicio
   end
 
+  def eliminar_ejercicio(ejercicio)
+    ejercicio.update(:eliminada => true, :estaSincronizado => true)
+  end
+
   def merge_ejercicio(ejercicioMobile)
     if(ejercicioMobile['esDeCarga'])
         ejercicioWeb = EjercicioDeCarga.find_by_id(ejercicioMobile['idWeb'])
