@@ -8,9 +8,16 @@ FitnessTimeApi::App.controllers :ejercicioService do
     if securityToken == nil
       get_error_response(404,"Usuario no autorizado.")
     else
-      jsonEjercicio = JSON.parse(params[:ejercicio])
+      begin
+        jsonEjercicio = JSON.parse(params[:ejercicio])
       rutina = Rutina.find_by_id(jsonEjercicio['idRutina'])
       ejercicio = create_ejercicio(jsonEjercicio, rutina)
+      assembler = EjercicioAssembler.new
+      ejercicioDTO = assembler.crear_dto(ejercicio, ejercicio.esDeCarga)
+      get_success_response(ejercicioDTO.to_json(''))
+      rescue DataMapper::SaveFailureError
+        get_error_response(404,'No se pudo crear el ejercicio')
+      end
     end
   end
 
