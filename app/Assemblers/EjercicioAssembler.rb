@@ -2,22 +2,24 @@ require_relative '../DTOs/EjercicioDTO.rb'
 
 class EjercicioAssembler
 
-	def crear_dto (ejercicio, carga)
+	def crear_dto (ejercicioPadre, carga)
         ejercicioDTO = EjercicioDTO.new
+        if(carga) 
+            ejercicio = EjercicioDeCarga.find_by_id(ejercicioPadre.id)
+            ejercicioDTO.repeticiones = ejercicio.repeticiones 
+            ejercicioDTO.tiempoActivo = nil
+            ejercicioDTO.tiempoDescanso = nil
+        else 
+            ejercicio = EjercicioDeAerobico.find_by_id(ejercicioPadre.id)
+            ejercicioDTO.repeticiones = nil 
+            ejercicioDTO.tiempoActivo = ejercicio.tiempoActivo
+            ejercicioDTO.tiempoDescanso = ejercicio.tiempoDescanso
+        end
         ejercicioDTO.idWeb = ejercicio.id
        	ejercicioDTO.idMobile = ejercicio.idMobile
         ejercicioDTO.nombre = ejercicio.nombre
         ejercicioDTO.diaDeLaSemana = ejercicio.diaDeLaSemana
         ejercicioDTO.series = ejercicio.series
-        if(carga) 
-            ejercicioDTO.repeticiones = ejercicio.repeticiones 
-            ejercicioDTO.tiempoActivo = nil
-            ejercicioDTO.tiempoDescanso = nil
-        else 
-            ejercicioDTO.repeticiones = nil 
-            ejercicioDTO.tiempoActivo = ejercicio.tiempoActivo
-            ejercicioDTO.tiempoDescanso = ejercicio.tiempoDescanso
-        end
         ejercicioDTO.nombreCambio = ejercicio.nombreCambio
         ejercicioDTO.diaDeLaSemanaCambio = ejercicio.diaDeLaSemanaCambio
         ejercicioDTO.seriesCambio = ejercicio.seriesCambio
