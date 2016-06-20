@@ -12,7 +12,7 @@ FitnessTimeApi::App.helpers do
                      :version => versionWeb, :repeticiones => jsonEjercicio['repeticiones'], 
                      :nombreCambio => jsonEjercicio['nombreCambio'], :seriesCambio => jsonEjercicio['seriesCambio'],
                      :diaDeLaSemanaCambio => jsonEjercicio['diaDeLaSemanaCambio'], :repeticionesCambio => jsonEjercicio['repeticionesCambio'],
-                     :estaSincronizado => true)
+                     :eliminada => jsonEjercicio['eliminada'], :estaSincronizado => true)
     else
         ejercicio = EjercicioDeAerobico.find_by_id(jsonEjercicio['idWeb'])
         versionWeb = ejercicio.version + 1
@@ -22,7 +22,7 @@ FitnessTimeApi::App.helpers do
                      :tiempoActivo => jsonEjercicio['tiempoActivo'], :tiempoDescanso => jsonEjercicio['tiempoDescanso'], 
                      :nombreCambio => jsonEjercicio['nombreCambio'], :seriesCambio => jsonEjercicio['seriesCambio'],
                      :tiempoActivoCambio => jsonEjercicio['tiempoActivoCambio'], :tiempoDescansoCambio => jsonEjercicio['tiempoDescansoCambio'],
-                     :estaSincronizado => true)
+                     :eliminada => jsonEjercicio['eliminada'], :estaSincronizado => true)
     end
     return ejercicio
   end
@@ -86,7 +86,8 @@ FitnessTimeApi::App.helpers do
     
     ejercicioWeb.update(:nombreCambio => false, :diaDeLaSemanaCambio => false, :seriesCambio => false,
                         :repeticionesCambio => false, :tiempoActivoCambio => false,
-                        :tiempoDescansoCambio => false, :estaSincronizado => true)
+                        :tiempoDescansoCambio => false, :eliminada => ejercicioMobile['eliminada'],
+                        :estaSincronizado => true)
   end
 
   def sincronizar_ejercicios(jsonEjercicios, rutina)

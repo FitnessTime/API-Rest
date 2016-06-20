@@ -10,7 +10,7 @@ FitnessTimeApi::App.helpers do
                   :versionMobile => jsonRutina['versionMobile'], :version => versionWeb,
                   :inicioCambio => jsonRutina['inicioCambio'], :finCambio => jsonRutina['finCambio'], 
                   :aclaracionCambio => jsonRutina['aclaracionCambio'], :descripcionCambio => jsonRutina['descripcionCambio'], 
-                  :estaSincronizado => true)
+                  :eliminada => jsonRutina['eliminada'] , :estaSincronizado => true)
     return rutina
   end
 
@@ -29,6 +29,7 @@ FitnessTimeApi::App.helpers do
     rutina.descripcionCambio = jsonRutina['descripcionCambio']
     rutina.aclaracionCambio = jsonRutina['aclaracionCambio']
     rutina.estaSincronizado = true
+    rutina.version = 0;
     rutina.usuario = usuario
     if(jsonRutina['ejercicios'] != nil)
       jsonRutina['ejercicios'].each do |ejercicio|
@@ -79,7 +80,8 @@ FitnessTimeApi::App.helpers do
       rutinaWeb.update(:descripcion => rutinaMobile['descripcion'])
     end
     rutinaWeb.update(:finCambio => false, :inicioCambio => false, :aclaracionCambio => false,
-                     :descripcionCambio => false, :estaSincronizado => true)
+                     :descripcionCambio => false, :eliminada => rutinaMobile['eliminada'],
+                     :estaSincronizado => true)
   end
 
   def sincronizar_rutinas(jsonRutinas)
