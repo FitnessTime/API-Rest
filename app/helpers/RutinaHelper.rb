@@ -87,7 +87,7 @@ FitnessTimeApi::App.helpers do
   def sincronizar_rutinas(jsonRutinas)
     jsonRutinas.each do |rutinaMobile|
       if(rutinaMobile['idWeb'] == nil)
-        create_rutina(rutinaMobile)
+        rutinaWeb = create_rutina(rutinaMobile)
       else
         rutinaWeb = Rutina.find_by_id(rutinaMobile['idWeb'])
         if(rutinaWeb.version > rutinaMobile['versionWeb'])
