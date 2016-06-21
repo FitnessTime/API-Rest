@@ -48,10 +48,14 @@ FitnessTimeApi::App.controllers :ejercicioService do
     if securityToken == nil
       get_error_response(404,"Usuario no autorizado.")
     else
-      ejercicio = Ejercicio.find_by_id(params[:id])
+      if(params[:esDeCarga])
+        ejercicio = EjercicioDeCarga.find_by_id(params[:id])
+      else
+        ejercicio = EjercicioDeAerobico.find_by_id(params[:id])
+      end
       ejercicio.update(:eliminada => true, :estaSincronizado => true)
       assembler = EjercicioAssembler.new
-      ejercicioDTO = assembler.crear_dto(ejercicio,ejercicio.esDeCarga)
+      ejercicioDTO = assembler.crear_dto(ejercicio, params[:esDeCarga])
       get_success_response(ejercicioDTO.to_json(''))
     end
   end
