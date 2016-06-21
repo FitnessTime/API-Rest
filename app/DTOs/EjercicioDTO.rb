@@ -1,6 +1,6 @@
 class EjercicioDTO
 
-	  attr_accessor :idWeb
+	attr_accessor :idWeb
     attr_accessor :idMobile
   	attr_accessor :nombre
   	attr_accessor :series

@@ -1,4 +1,3 @@
-
 class RutinaDTO
 
 	attr_accessor :idWeb
