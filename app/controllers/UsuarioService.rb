@@ -17,7 +17,8 @@ FitnessTimeApi::App.controllers :usuarioService do
     if(securityToken == nil)
       get_error_response(412,'Usuario no autenticado')
     else
-      @usuario = Usuario.find_by_email(params[:email])
+      jsonUsuario = JSON.parse(params[:usuario])
+      @usuario = Usuario.find_by_email(jsonUsuario['email'])
       @usuario = update_usuario(@usuario,params)
       get_success_response('Usuario modificado con exito.')
     end

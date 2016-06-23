@@ -33,6 +33,7 @@ FitnessTimeApi::App.controllers :rutinaService do
     if securityToken == nil
       get_error_response(404,"Usuario no autorizado.")
     else
+
       jsonRutina = JSON.parse(params[:rutina])
       rutina_actualizada = actualizar_rutina(jsonRutina)
       assembler = RutinaAssembler.new
