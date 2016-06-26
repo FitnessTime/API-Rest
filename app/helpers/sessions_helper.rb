@@ -21,4 +21,12 @@ FitnessTimeApi::App.helpers do
 		!current_token.nil?
 	end
 
+	def actualizar_security_token(securityToken, usuario)
+		nombre = usuario.nombre
+		fecha = usuario.fechaNacimiento
+		peso = usuario.peso
+		securityToken.update(:nombreUsuario => nombre, :fechaNacimientoUsuario => fecha,
+                           :pesoUsuario => peso)
+		return securityToken
+	end
 end

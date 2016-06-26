@@ -20,8 +20,9 @@ FitnessTimeApi::App.controllers :usuarioService do
       jsonUsuario = JSON.parse(params[:usuario])
       usuario = Usuario.find_by_email(jsonUsuario['email'])
       usuario = update_usuario(usuario,jsonUsuario)
-      securityToken.update(:nombreUsuario => usuario.nombre, :fechaNacimientoUsuario => usuario.fechaNacimiento,
-                           :pesoUsuario => usuario.peso)
+      DataMapper.finalize
+      securityToken.update(:nombreUsuario => jsonUsuario['nombre'], :fechaNacimientoUsuario => jsonUsuario['fecha'],
+                           :pesoUsuario => jsonUsuario['peso'])
       get_success_response(securityToken.to_json)
     end
   end
