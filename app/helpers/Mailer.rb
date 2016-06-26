@@ -11,4 +11,12 @@ FitnessTimeApi::App.helpers do
 		rescue Exception
 		end
 	end
+
+	def enviar_mail_cambio_contrasenia(to, contrasenia)
+		begin
+		email(:from => "FitnessTime", :to => to, :subject => "Cambio password.",
+		 	  :body=>"Su nuevo password es: " + contrasenia
+		rescue Exception
+		end
+	end
 end

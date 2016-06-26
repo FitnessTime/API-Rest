@@ -28,11 +28,12 @@ FitnessTimeApi::App.controllers :usuarioService do
   end
 
   put :cambiarContrasenia, :map => '/cambiarContrasenia' do
-    securityToken = SecurityToken.first(:emailUsuario => params[:email], :authToken => params[:authToken])
+    securityToken = SecurityToken.find_by_authToken(params[:authToken])
     if(securityToken == nil)
       get_error_response(404,"Usuario no autenticado")
     else
-      cambiar_contrasenia(params)
+      usuario = cambiar_contrasenia(params)
+      enviar_mail_cambio_contrasenia(usuario.email, params[:nuevaPass])
       get_success_response("Contrasenia cambiada con exito.")
     end
   end

@@ -8,9 +8,10 @@ FitnessTimeApi::App.helpers do
   end
 
   def cambiar_contrasenia(params)
-      @usuario = Usuario.find_by_email(params[:email])
+      usuario = Usuario.find_by_email(params[:email])
       pass = ::BCrypt::Password.create(params[:nuevaPass]) unless params[:nuevaPass].nil?
-      @usuario.update(:crypted_password => pass)
+      usuario.update(:crypted_password => pass)
+      return usuario
   end
 
   def create_usuario(params)
