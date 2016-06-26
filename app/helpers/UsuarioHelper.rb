@@ -1,9 +1,10 @@
 FitnessTimeApi::App.helpers do
 
-  def update_usuario(usuario,params)
-    pass = ::BCrypt::Password.create(params[:pass]) unless params[:pass].nil?
-    usuario.update(:nombre => params[:nombre], :crypted_password => pass,
-    			   :fechaNacimiento => params[:fecha], :peso => params[:peso])
+  def update_usuario(usuario,jsonUsuario)
+
+    usuario.update(:nombre => jsonUsuario['nombre'], :fechaNacimiento => jsonUsuario['fecha'], 
+                   :peso => jsonUsuario['peso'])
+    return usuario
   end
 
   def cambiar_contrasenia(params)
