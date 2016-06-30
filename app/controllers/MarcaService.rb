@@ -10,6 +10,7 @@ FitnessTimeApi::App.controllers :marcaService do
       jsonMarca = JSON.parse(params[:marca])
       ejercicio = EjercicioDeCarga.find_by_id(jsonMarca['idEjercicio'])
       marca = create_marca(jsonMarca, ejercicio)
+      get_success_response("")
     end
   end
 

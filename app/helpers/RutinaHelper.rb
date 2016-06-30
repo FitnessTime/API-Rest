@@ -5,7 +5,7 @@ FitnessTimeApi::App.helpers do
   def actualizar_rutina(jsonRutina)
     rutina = Rutina.find_by_id(jsonRutina['idWeb'])
     versionWeb = rutina.version + 1
-    rutina.update(:inicio => jsonRutina['inicio'], :fin => jsonRutina['fin'],
+    rutina.update(:idMobile => jsonRutina['idMobile'], :inicio => jsonRutina['inicio'], :fin => jsonRutina['fin'],
     			        :descripcion => jsonRutina['descripcion'], :aclaracion => jsonRutina['aclaracion'],
                   :versionMobile => jsonRutina['versionMobile'], :version => versionWeb,
                   :inicioCambio => jsonRutina['inicioCambio'], :finCambio => jsonRutina['finCambio'], 

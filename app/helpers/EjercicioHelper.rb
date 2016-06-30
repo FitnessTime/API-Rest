@@ -106,6 +106,7 @@ FitnessTimeApi::App.helpers do
           actualizar_ejercicio(ejercicioMobile)
         end
       end
+      sincronizar_marcas(ejercicioMobile['marcas'])
     end  
   end
 
