@@ -7,7 +7,7 @@ FitnessTimeApi::App.helpers do
     if(jsonEjercicio['esDeCarga'])
         ejercicio = EjercicioDeCarga.find_by_id(jsonEjercicio['idWeb'])
         versionWeb = ejercicio.version + 1
-        ejercicio.update(:nombre => jsonEjercicio['nombre'], :series => jsonEjercicio['series'],
+        ejercicio.update(:idMobile => jsonEjercicio['idMobile'], :nombre => jsonEjercicio['nombre'], :series => jsonEjercicio['series'],
                      :diaDeLaSemana => jsonEjercicio['diaDeLaSemana'], :versionMobile => jsonEjercicio['versionMobile'], 
                      :version => versionWeb, :repeticiones => jsonEjercicio['repeticiones'], 
                      :nombreCambio => jsonEjercicio['nombreCambio'], :seriesCambio => jsonEjercicio['seriesCambio'],
@@ -16,7 +16,7 @@ FitnessTimeApi::App.helpers do
     else
         ejercicio = EjercicioDeAerobico.find_by_id(jsonEjercicio['idWeb'])
         versionWeb = ejercicio.version + 1
-        ejercicio.update(:nombre => jsonEjercicio['nombre'], :series => jsonEjercicio['series'],
+        ejercicio.update(:idMobile => jsonEjercicio['idMobile'], :nombre => jsonEjercicio['nombre'], :series => jsonEjercicio['series'],
                      :diaDeLaSemana => jsonEjercicio['diaDeLaSemana'], :versionMobile => jsonEjercicio['versionMobile'], 
                      :version => versionWeb, :diaDeLaSemanaCambio => jsonEjercicio['diaDeLaSemanaCambio'],
                      :tiempoActivo => jsonEjercicio['tiempoActivo'], :tiempoDescanso => jsonEjercicio['tiempoDescanso'], 
@@ -87,7 +87,7 @@ FitnessTimeApi::App.helpers do
     ejercicioWeb.update(:nombreCambio => false, :diaDeLaSemanaCambio => false, :seriesCambio => false,
                         :repeticionesCambio => false, :tiempoActivoCambio => false,
                         :tiempoDescansoCambio => false, :eliminada => ejercicioMobile['eliminada'],
-                        :estaSincronizado => true)
+                        :estaSincronizado => true, :idMobile => ejercicioMobile['idMobile'])
   end
 
   def sincronizar_ejercicios(jsonEjercicios, rutina)
