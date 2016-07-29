@@ -26,7 +26,7 @@ FitnessTimeApi::App.controllers :ejercicioService do
     if securityToken == nil
       get_error_response(404,"Usuario no autorizado.")
     else
-      get_success_response("Ok")
+      get_success_response(retornar_ejercicios_dto(securityToken).to_json)
     end
   end
 

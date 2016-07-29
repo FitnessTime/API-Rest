@@ -59,6 +59,19 @@ FitnessTimeApi::App.helpers do
     ejercicio.update(:eliminada => true, :estaSincronizado => true)
   end
 
+  def retornar_ejercicios_dto(securityToken)
+    ejercicios = Ejercicio.find_all_by_eliminada(false)
+    ret_ejercicios_dto = Array.new(ejercicios.size)
+    assembler = EjercicioAssembler.new
+    index = 0
+    ejercicios.each do |ejercicio|
+      rutina = Rutina.find_by_id(ejercicio.rutina.id)
+      ret_ejercicios_dto[index] = assembler.crear_dto(ejercicio, rutina.esDeCarga)
+      index = index + 1
+    end
+    return ret_ejercicios_dto
+  end
+
   def merge_ejercicio(ejercicioMobile)
     if(ejercicioMobile['esDeCarga'])
         ejercicioWeb = EjercicioDeCarga.find_by_id(ejercicioMobile['idWeb'])
