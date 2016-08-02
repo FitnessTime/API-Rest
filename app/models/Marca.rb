@@ -5,5 +5,5 @@ class Marca
 	property :idMobile, Integer
   	property :fecha, Date
   	property :carga, Integer
-  	belongs_to :ejercicio
+  	belongs_to :ejercicio, 'Marca', :key => true
 end

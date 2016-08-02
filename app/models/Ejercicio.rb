@@ -18,6 +18,6 @@ class Ejercicio
     property :repeticionesCambio, Boolean, :default => false
     property :tiempoActivoCambio, Boolean, :default => false
     property :tiempoDescansoCambio, Boolean, :default => false
-    has n, :marcas 
+    has n, :marcas
 	  belongs_to :rutina
 end
