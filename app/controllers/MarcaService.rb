@@ -28,15 +28,17 @@ FitnessTimeApi::App.controllers :marcaService do
         ret_ejercicio_marcas = Array.new(rutinas.ejercicios.size)
         rutina.ejercicios.each do |ejercicio|
           marcas = Marca.find_all_by_ejercicio_id(ejercicio.id)
-          marcas_dto = Array.new(marcas.size)
-          i=0
-          marcas.each do |marcaa|
-            marcas_dto[i] = assembler.crear_dto(marcaa)
-            i = i + 1
+          if marcas != nil && marcas.size > 0
+            marcas_dto = Array.new(marcas.size)
+            i=0
+            marcas.each do |marcaa|
+              marcas_dto[i] = assembler.crear_dto(marcaa)
+              i = i + 1
+            end
+            marca = EjercicioMarcas.new(ejercicio, marcas_dto)
+            ret_ejercicio_marcas[index] = marca
+            index = index + 1
           end
-          marca = EjercicioMarcas.new(ejercicio, marcas_dto)
-          ret_ejercicio_marcas[index] = marca
-          index = index + 1
         end
         ret_estadisticas_marcas[indexx] = EstadisticasMarcas.new(rutina, ret_ejercicio_marcas)
       end
