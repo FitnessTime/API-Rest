@@ -19,8 +19,16 @@ FitnessTimeApi::App.controllers :marcaService do
     #if securityToken == nil
     #  get_error_response(404,"Usuario no autorizado.")
     #else
+    count = 0
       rutinas = Rutina.find_all_by_eliminada(false)
-      ret_estadisticas_marcas = Array.new(rutinas.size)
+      rutinas.each do |rutinaCount|
+        rutinaCount.ejercicios.each do |ejercicioCount|
+          if(ejercicioCount.marcas != nil && ejercicioCount.marcas.size > 0)
+            count = count + 1
+          end
+        end
+      end
+      ret_estadisticas_marcas = Array.new(count)
       assembler = MarcaAssembler.new
       indexx = 0
       rutinas.each do |rutina|
