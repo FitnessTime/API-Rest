@@ -11,11 +11,10 @@ FitnessTimeApi::App.helpers do
     	return marca
   	end
 
-  	def sincronizar_marcas(jsonMarcas)
+  	def sincronizar_marcas(jsonMarcas, ejercicio)
   		jsonMarcas.each do |marcaMobile|
   			marca = Marca.find_by_id(marcaMobile['idWeb'])
   			if(marca == nil)
-  				ejercicio = EjercicioDeCarga.find_by_id(marcaMobile['ejercicioId'])
   				create_marca(marcaMobile, ejercicio)
   			end
   		end

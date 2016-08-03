@@ -51,6 +51,11 @@ FitnessTimeApi::App.helpers do
     ejercicio.tiempoActivoCambio = jsonEjercicio['tiempoActivoCambio']
     ejercicio.tiempoDescansoCambio = jsonEjercicio['tiempoDescansoCambio']
   	ejercicio.rutina = rutina
+    if(jsonEjercicio['marcas'] != nil)
+      jsonEjercicio['marcas'].each do |marca|
+        ejer = create_marca(marca, ejercicio)
+      end
+    end
   	ejercicio.save!()
     return ejercicio
   end
@@ -110,6 +115,7 @@ FitnessTimeApi::App.helpers do
       else
         if(ejercicioMobile['esDeCarga'])
             ejercicioWeb = EjercicioDeCarga.find_by_id(ejercicioMobile['idWeb'])
+            sincronizar_marcas(ejercicioMobile['marcas'], ejercicioWeb)
         else
             ejercicioWeb = EjercicioDeAerobico.find_by_id(ejercicioMobile['idWeb'])
         end
@@ -119,7 +125,6 @@ FitnessTimeApi::App.helpers do
           actualizar_ejercicio(ejercicioMobile)
         end
       end
-      sincronizar_marcas(ejercicioMobile['marcas'])
     end  
   end
 
