@@ -51,7 +51,7 @@ FitnessTimeApi::App.helpers do
     ejercicio.tiempoActivoCambio = jsonEjercicio['tiempoActivoCambio']
     ejercicio.tiempoDescansoCambio = jsonEjercicio['tiempoDescansoCambio']
   	ejercicio.rutina = rutina
-  	ejercicio.save()
+  	ejercicio.save!()
     return ejercicio
   end
 

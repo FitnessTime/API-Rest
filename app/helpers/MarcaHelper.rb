@@ -7,7 +7,7 @@ FitnessTimeApi::App.helpers do
     	marca.idMobile = jsonMarca['idMobile']
     	marca.carga = jsonMarca['carga']
     	marca.fecha = jsonMarca['fecha']
-    	marca.save()
+    	marca.save!()
     	return marca
   	end
 

@@ -95,8 +95,9 @@ FitnessTimeApi::App.helpers do
         else
           actualizar_rutina(rutinaMobile)
         end
+        sincronizar_ejercicios(rutinaMobile['ejercicios'], rutinaWeb)
       end
-      sincronizar_ejercicios(rutinaMobile['ejercicios'], rutinaWeb)
+      
     end  
   end
 end
