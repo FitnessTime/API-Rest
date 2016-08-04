@@ -48,8 +48,11 @@ FitnessTimeApi::App.controllers :marcaService do
             index = index + 1
           end
         end
-        ret_estadisticas_marcas[indexx] = EstadisticasMarcas.new(rutina, ret_ejercicio_marcas)
-        indexx = indexx + 1
+        if(ret_ejercicio_marcas.size == rutina.ejercicios.size)
+          ret_estadisticas_marcas[indexx] = EstadisticasMarcas.new(rutina, ret_ejercicio_marcas)
+          indexx = indexx + 1
+        end
+        
       end
       return ret_estadisticas_marcas.to_json
     #end
