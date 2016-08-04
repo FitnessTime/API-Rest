@@ -33,7 +33,7 @@ FitnessTimeApi::App.controllers :marcaService do
       indexx = 0
       rutinas.each do |rutina|
         index = 0
-        ret_ejercicio_marcas = Array.new(rutinas.ejercicios.size)
+        ret_ejercicio_marcas = Array.new(rutina.ejercicios.size)
         rutina.ejercicios.each do |ejercicio|
           marcas = Marca.find_all_by_ejercicio_id(ejercicio.id)
           if marcas != nil && marcas.size > 0
@@ -49,6 +49,7 @@ FitnessTimeApi::App.controllers :marcaService do
           end
         end
         ret_estadisticas_marcas[indexx] = EstadisticasMarcas.new(rutina, ret_ejercicio_marcas)
+        indexx = indexx + 1
       end
       return ret_estadisticas_marcas.to_json
     #end
