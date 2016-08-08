@@ -9,7 +9,6 @@ class MarcaAssembler
        	marcaDTO.idMobile = marca.idMobile
         marcaDTO.fecha = marca.fecha
         marcaDTO.carga = marca.carga
-        marcaDTO.idEjercicio = marca.ejercicio.id
 
         return marcaDTO
     end
