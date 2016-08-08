@@ -117,13 +117,17 @@ FitnessTimeApi::App.helpers do
 
   def get_cantidad_rutinas_con_ejercicios_con_marcas()
     count = 0
+    tieneEjerciciosConMarcas = false
     rutinas = Rutina.find_all_by_eliminada(false)
     rutinas.each do |rutinaCount|
       rutinaCount.ejercicios.each do |ejercicioCount|
         marcas = Marca.find_all_by_ejercicio_id(ejercicioCount.id)
         if(marcas != nil && marcas.size > 0)
-          count = count + 1
+          tieneEjerciciosConMarcas = true
         end
+      end
+      if tieneEjerciciosConMarcas
+        count = count + 1
       end
     end
     return count

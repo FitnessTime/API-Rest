@@ -16,7 +16,7 @@ FitnessTimeApi::App.controllers :marcaService do
 
   get :marcas, :map => '/marcas' do
     securityToken = SecurityToken.find_by_authToken(params[:authToken])
-    if securityToken == nil
+    if false
       get_error_response(404,"Usuario no autorizado.")
     else
       rutinas = Rutina.find_all_by_eliminada(false)
