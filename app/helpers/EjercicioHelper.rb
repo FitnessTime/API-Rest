@@ -119,10 +119,12 @@ FitnessTimeApi::App.helpers do
         else
             ejercicioWeb = EjercicioDeAerobico.find_by_id(ejercicioMobile['idWeb'])
         end
-        if(ejercicioWeb.version > ejercicioMobile['versionWeb'])
-          merge_ejercicio(ejercicioMobile)
-        else
-          actualizar_ejercicio(ejercicioMobile)
+        if not ejercicioWeb.eliminada
+          if(ejercicioWeb.version > ejercicioMobile['versionWeb'])
+            merge_ejercicio(ejercicioMobile)
+          else
+            actualizar_ejercicio(ejercicioMobile)
+          end
         end
       end
     end  
