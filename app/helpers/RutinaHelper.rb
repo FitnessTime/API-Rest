@@ -53,6 +53,18 @@ FitnessTimeApi::App.helpers do
     return rutinaDTO
   end
 
+  def retornar_rutinas_no_eliminadas_dto(securityToken)
+    rutinas = Rutina.find_all_by_usuario_email_and_eliminada(securityToken.emailUsuario, false)
+    ret_rutinas_dto = Array.new(rutinas.size)
+    assembler = RutinaAssembler.new
+    index = 0
+    rutinas.each do |rutina|
+      ret_rutinas_dto[index] = assembler.crear_dto(rutina)
+      index = index + 1
+    end
+    return ret_rutinas_dto
+  end
+
   def retornar_rutinas_dto(securityToken)
     rutinas = Rutina.find_all_by_usuario_email(securityToken.emailUsuario)
     ret_rutinas_dto = Array.new(rutinas.size)
