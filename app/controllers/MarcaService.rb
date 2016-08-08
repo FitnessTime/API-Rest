@@ -28,7 +28,8 @@ FitnessTimeApi::App.controllers :marcaService do
         index = 0
         cant = get_cantidad_ejercicios_con_marcas(rutina.id)
         ret_ejercicio_marcas = Array.new(cant)
-        rutina.ejercicios.each do |ejercicio|
+        ejercicios = Ejercicio.find_all_by_eliminada_and_type_and_rutina_id(false, 'EjercicioDeCarga', rutina.id)
+        ejercicios.each do |ejercicio|
           marcas = Marca.find_all_by_ejercicio_id(ejercicio.id)
           if marcas != nil && marcas.size > 0
             marcas_dto = Array.new(marcas.size)
