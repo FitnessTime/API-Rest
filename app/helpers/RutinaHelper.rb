@@ -90,12 +90,14 @@ FitnessTimeApi::App.helpers do
         rutinaWeb = create_rutina(rutinaMobile)
       else
         rutinaWeb = Rutina.find_by_id(rutinaMobile['idWeb'])
-        if(rutinaWeb.version > rutinaMobile['versionWeb'])
-          merge_rutina(rutinaMobile)
-        else
-          actualizar_rutina(rutinaMobile)
+        if not rutinaWeb.eliminada
+          if(rutinaWeb.version > rutinaMobile['versionWeb'])
+            merge_rutina(rutinaMobile)
+          else
+            actualizar_rutina(rutinaMobile)
+          end
+          sincronizar_ejercicios(rutinaMobile['ejercicios'], rutinaWeb)
         end
-        sincronizar_ejercicios(rutinaMobile['ejercicios'], rutinaWeb)
       end
       
     end  
