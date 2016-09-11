@@ -52,10 +52,6 @@ FitnessTimeApi::App.controllers :rutinaService do
     end
   end
 
-  get :consultar, :map => '/rutinas/:rutina_id' do
-    @rutina = Rutina.get(params[:rutina_id])
-  end
-
   get :sincronizar, :map => '/sincronizarRutinas' do
     securityToken = SecurityToken.find_by_authToken(params[:authToken])
     if securityToken == nil

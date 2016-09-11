@@ -65,14 +65,19 @@ FitnessTimeApi::App.helpers do
   end
 
   def retornar_ejercicios_dto(securityToken)
-    ejercicios = Ejercicio.find_all_by_eliminada(false)
-    ret_ejercicios_dto = Array.new(ejercicios.size)
-    assembler = EjercicioAssembler.new
-    index = 0
-    ejercicios.each do |ejercicio|
-      rutina = Rutina.find_by_id(ejercicio.rutina.id)
-      ret_ejercicios_dto[index] = assembler.crear_dto(ejercicio, rutina.esDeCarga)
-      index = index + 1
+    rutinas = Rutina.find_all_by_eliminada_and_usuario_email(false, securityToken.emailUsuario)
+    ret_ejercicios_dto = Array.new(get_cantidad_ejercicio_de_usuario(securityToken.emailUsuario))
+    rutinas.each do |rutina|
+      ejercicios = Ejercicio.find_all_by_eliminada_and_rutina_id(false, rutina.id)
+      assembler = EjercicioAssembler.new
+      index = 0
+      ejercicios.each do |ejercicio|
+        rutina = Rutina.find_by_id_and_usuario_email(ejercicio.rutina.id, securityToken.emailUsuario)
+        if(rutina != nil)
+          ret_ejercicios_dto[index] = assembler.crear_dto(ejercicio, rutina.esDeCarga)
+          index = index + 1
+        end
+      end
     end
     return ret_ejercicios_dto
   end
@@ -142,4 +147,15 @@ FitnessTimeApi::App.helpers do
     return count
   end
 
+  def get_cantidad_ejercicio_de_usuario(usuario)
+    rutinas = Rutina.find_all_by_eliminada_and_usuario_email(false, usuario)
+    cant = 0
+    rutinas.each do |rutina|
+      ejercicios = Ejercicio.find_all_by_eliminada_and_rutina_id(false, rutina.id)
+      ejercicios.each do |ejercicio|
+        cant = cant + 1
+      end
+    end
+    return cant
+  end
 end

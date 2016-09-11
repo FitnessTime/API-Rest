@@ -19,7 +19,7 @@ FitnessTimeApi::App.controllers :marcaService do
     if false
       get_error_response(404,"Usuario no autorizado.")
     else
-      rutinas = Rutina.find_all_by_eliminada(false)
+      rutinas = Rutina.find_all_by_eliminada_and_usuario_email(false, securityToken.emailUsuario)
       count = get_cantidad_rutinas_con_ejercicios_con_marcas
       ret_estadisticas_marcas = Array.new(count)
       assembler = MarcaAssembler.new
@@ -53,8 +53,4 @@ FitnessTimeApi::App.controllers :marcaService do
     end
   end
 
-  get :consultarEjercicio, :map => '/rutinas/:rutina_id/ejercicios/:ejercicio_id/marcas/:marca_id' do
-    @marca = Marca.get!(params[:marca_id])
-    #Comunicamos el resultado de la operacion y mandamos el json
-  end
 end
