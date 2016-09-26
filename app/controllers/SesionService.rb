@@ -6,15 +6,24 @@ FitnessTimeApi::App.controllers :sesionService do
     begin
       usuario = Usuario.get!(params[:email])
       if(usuario.is_the_same_password?(params[:pass]))
-        securityToken = SecurityToken.new(usuario.email,usuario.nombre,generate_random,"", usuario.fechaNacimiento, usuario.peso)
-        securityToken.save()
-        get_success_response(securityToken.to_json)
+        if(usuario.activo)
+          securityToken = SecurityToken.new(usuario.email,usuario.nombre,generate_random,"", usuario.fechaNacimiento, usuario.peso)
+          securityToken.save()
+          get_success_response(securityToken.to_json)
+        else
+          get_error_response(404, "Cuenta no activada.")
+        end
       else
         get_error_response(404, "La contrasenia es incorrecta.")
       end
     rescue DataMapper::ObjectNotFoundError => e
       get_error_response(404, "No existe el usuario")
     end
+  end
+
+  get :activarCuenta, :map => '/activar' do
+    usuario = Usuario.get!(params[:email])
+    usuario.update(:activo => true)
   end
 
   get :cerrarSesion, :map => '/close' do

@@ -4,7 +4,7 @@ class Usuario
 	include DataMapper::Resource
 
 	property :email, String , :key => true
-
+	property :activo, Boolean, :default => false
 	property :nombre, String
 	property :crypted_password, String
 	property :fechaNacimiento, Date
