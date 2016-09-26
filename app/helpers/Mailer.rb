@@ -7,9 +7,9 @@ FitnessTimeApi::App.helpers do
 
 		 	  		  Su nuevo usuario es: " + usuario + "
 		 	  		  " +
-		 	  		  "Su password es: " + contrasenia) +
-
-					 "Para activar su cuenta haga click en el siguiente link: http://fitnesstime.herokuapp.com/activar?email=" + usuario
+		 	  		  "Su password es: " + contrasenia + "
+		 	  		  " +
+					  "Para activar su cuenta haga click en el siguiente link: http://fitnesstime.herokuapp.com/activar?email=" + usuario)
 		rescue Exception
 		end
 	end
