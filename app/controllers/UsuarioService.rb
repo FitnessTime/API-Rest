@@ -46,4 +46,10 @@ FitnessTimeApi::App.controllers :usuarioService do
     @usuario = Usuario.get(params[:email])
     get_success_response(@usuario.to_json)
   end
+
+  get :usuario, :map => '/deleteUsuarios' do
+    Usuario.all.destroy
+    get_success_response('Usuario eliminados')
+  end
+
 end
