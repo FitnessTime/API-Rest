@@ -10,7 +10,7 @@ module FitnessTimeApi
     enable :sessions
 
     set :delivery_method, :smtp => {
-      :address              => "smtp.gmail.com",
+      :address              => "smtp.sendgrid.net",
       :domain               => 'heroku.com',
       :port                 => 587,
       :user_name            => 'api.fitnesstime@gmail.com',
