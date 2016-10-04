@@ -1,3 +1,5 @@
+require 'mail'
+
 module FitnessTimeApi
   class App < Padrino::Application
     register Padrino::Rendering
@@ -15,8 +17,7 @@ module FitnessTimeApi
       :user_name            => 'api.fitnesstime@gmail.com',
       :password             => '4demarzo',
       :authentication       => :plain,
-      :enable_starttls_auto => true,
-      :domain               => 'api-fitnesstime.herokuapp.com'
+      :enable_starttls_auto => true
     }
     ##
     # Caching support

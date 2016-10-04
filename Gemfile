@@ -34,6 +34,7 @@ gem 'bcrypt-ruby', :require => 'bcrypt'
 gem 'json'
 gem 'clockwork'
 gem 'twitter'
+gem 'mail', '~> 2.5', '>= 2.5.4'
 gem 'dm-postgres-adapter'
 
 # Test requirements

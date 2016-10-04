@@ -293,6 +293,7 @@ DEPENDENCIES
   guard
   guard-rspec
   json
+  mail (~> 2.5, >= 2.5.4)
   padrino (= 0.11.2)
   padrino-sprockets
   rack-test
