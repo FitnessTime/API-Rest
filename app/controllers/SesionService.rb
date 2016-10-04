@@ -6,13 +6,13 @@ FitnessTimeApi::App.controllers :sesionService do
     begin
       usuario = Usuario.get!(params[:email])
       if(usuario.is_the_same_password?(params[:pass]))
-        if(usuario.activo)
+        #if(usuario.activo)
           securityToken = SecurityToken.new(usuario.email,usuario.nombre,generate_random,"", usuario.fechaNacimiento, usuario.peso)
           securityToken.save()
           get_success_response(securityToken.to_json)
-        else
-          get_error_response(404, "Cuenta no activada.")
-        end
+        #else
+        #  get_error_response(404, "Cuenta no activada.")
+        #end
       else
         get_error_response(404, "La contrasenia es incorrecta.")
       end
