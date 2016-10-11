@@ -7,7 +7,7 @@ FitnessTimeApi::App.controllers :sesionService do
       usuario = Usuario.get!(params[:email])
       if(usuario.is_the_same_password?(params[:pass]))
         #if(usuario.activo)
-          securityToken = SecurityToken.new(usuario.email,usuario.nombre,generate_random,"", usuario.fechaNacimiento, usuario.peso)
+          securityToken = SecurityToken.new(usuario.email,usuario.nombre,generate_random,"", usuario.fechaNacimiento, usuario.peso, usuario.minimoDePasosDiarios)
           securityToken.save()
           get_success_response(securityToken.to_json)
         #else

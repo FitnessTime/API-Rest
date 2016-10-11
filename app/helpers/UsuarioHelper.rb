@@ -22,6 +22,7 @@ FitnessTimeApi::App.helpers do
     usuario.fechaNacimiento = jsonUsuario['fecha']
     usuario.peso = jsonUsuario['peso']
     usuario.email = jsonUsuario['email']
+    usuario.minimoDePasosDiarios = jsonUsuario['minimoDePasosDiarios']
     return usuario
   end
 end

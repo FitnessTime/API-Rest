@@ -18,7 +18,6 @@ module FitnessTimeApi
       :password             => '4demarzo',
       :authentication       => :plain,
       :enable_starttls_auto => true,
-      :domain => 'heroku.com'
     }
     ##
     # Caching support
