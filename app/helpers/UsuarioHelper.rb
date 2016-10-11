@@ -3,7 +3,7 @@ FitnessTimeApi::App.helpers do
   def update_usuario(usuario,jsonUsuario)
 
     usuario.update(:nombre => jsonUsuario['nombre'], :fechaNacimiento => jsonUsuario['fecha'], 
-                   :peso => jsonUsuario['peso'])
+                   :peso => jsonUsuario['peso'], :minimoDePasosDiarios => jsonUsuario['cantidadMinimaPasos'])
     return usuario
   end
 
@@ -22,7 +22,7 @@ FitnessTimeApi::App.helpers do
     usuario.fechaNacimiento = jsonUsuario['fecha']
     usuario.peso = jsonUsuario['peso']
     usuario.email = jsonUsuario['email']
-    usuario.minimoDePasosDiarios = jsonUsuario['minimoDePasosDiarios']
+    usuario.minimoDePasosDiarios = jsonUsuario['cantidadMinimaPasos']
     return usuario
   end
 end
