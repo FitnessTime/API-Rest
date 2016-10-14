@@ -14,7 +14,7 @@ module FitnessTimeApi
     set :delivery_method, :smtp => {
       :address              => 'smtp.gmail.com',
       :port                 => 587,
-      :user_name            => 'fitnesstimeApplication@gmail.com',
+      :user_name            => 'fitnesstimeapplication@gmail.com',
       :password             => '4demarzo',
       :authentication       => :plain,
       :enable_starttls_auto => true
