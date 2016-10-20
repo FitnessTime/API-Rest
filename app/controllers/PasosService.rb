@@ -1,3 +1,4 @@
+
 FitnessTimeApi::App.controllers :pasosService do
   
   post :registrarPasos, :map => '/pasos' do
