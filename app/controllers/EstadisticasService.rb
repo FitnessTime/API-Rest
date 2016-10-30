@@ -9,10 +9,6 @@ FitnessTimeApi::App.controllers :estadisticasService do
 
   end
 
-  get :progresionDeCargas , :map => '/estadisticas/progresionDeCargas' do
-
-  end
-
   get :pasosEnMeses, :map => '/pasos' do
     securityToken = SecurityToken.find_by_authToken(params[:authToken])
     if securityToken == nil
