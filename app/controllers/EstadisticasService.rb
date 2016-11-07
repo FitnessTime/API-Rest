@@ -9,7 +9,35 @@ FitnessTimeApi::App.controllers :estadisticasService do
 
   end
 
-  get :pasosEnMeses, :map => '/pasos' do
+get :estadisticaPasos, :map => '/pasos' do
+    securityToken = SecurityToken.find_by_authToken(params[:authToken])
+    if securityToken == nil
+      get_error_response(404,"Usuario no autorizado.")
+    else
+      objetivoPasos = securityToken.cantidadMinimaPasosUsuario
+      index = -6
+      estadisticas = Array.new(7)
+      while index <= 0 do
+        dia = Date.today
+        dia = dia+index
+        paso = Paso.find_by_fecha(dia)
+        if(paso != nil)
+          if((objetivoPasos - paso.pasos_dados) <= 0)
+          estadisticas[index] = EstadisticasPasos.new(l(paso.fecha,format: '%a., %d %b'),[["pasos dados", paso.pasos_dados],["pasos faltantes", 0]])
+          else
+            estadisticas[index] = EstadisticasPasos.new(l(paso.fecha,format: '%a., %d %b'),[["pasos dados", paso.pasos_dados],["pasos faltantes", objetivoPasos - paso.pasos_dados]])
+          end
+        else
+          estadisticas[index] = EstadisticasPasos.new(l(dia,format: '%a., %d %b'),[["pasos dados", 0], ["pasos faltante", objetivoPasos]])
+        end
+        index = index + 1
+      end
+      get_success_response(estadisticas.to_json)
+    end
+  end
+
+
+  get :pasosEnMeses, :map => '/pasoss' do
     securityToken = SecurityToken.find_by_authToken(params[:authToken])
     if securityToken == nil
       get_error_response(404,"Usuario no autorizado.")
