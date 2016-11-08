@@ -23,7 +23,7 @@ get :estadisticaPasos, :map => '/pasos' do
         paso = Paso.find_by_fecha(dia)
         if(paso != nil)
           if((objetivoPasos - paso.pasos_dados) <= 0)
-          estadisticas[index] = EstadisticasPasos.new(l(paso.fecha,format: '%a., %d %b'),[["pasos dados", paso.pasos_dados],["pasos faltantes", 0]])
+            estadisticas[index] = EstadisticasPasos.new(l(paso.fecha,format: '%a., %d %b'),[["pasos dados", paso.pasos_dados],["pasos faltantes", 0]])
           else
             estadisticas[index] = EstadisticasPasos.new(l(paso.fecha,format: '%a., %d %b'),[["pasos dados", paso.pasos_dados],["pasos faltantes", objetivoPasos - paso.pasos_dados]])
           end

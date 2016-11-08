@@ -11,11 +11,11 @@ FitnessTimeApi::App.controllers :pasosService do
       if (paso == nil)
         nuevoPaso = Paso.new()
         nuevoPaso.fecha = jsonPaso['fecha']
-        nuevoPaso.pasos_dados = jsonPaso['pasos_dados']
+        nuevoPaso.pasos_dados = jsonPaso['pasosDados']
         nuevoPaso.usuario = Usuario.find_by_email(jsonPaso['idUsuario'])
         nuevoPaso.save!()
       else
-        paso.update(:pasos_dados => jsonPaso['pasos_dados'])
+        paso.update(:pasos_dados => jsonPaso['pasosDados'])
       end
       get_success_response("")
     end
