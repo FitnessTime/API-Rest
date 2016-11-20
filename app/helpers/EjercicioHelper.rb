@@ -67,10 +67,10 @@ FitnessTimeApi::App.helpers do
   def retornar_ejercicios_dto(securityToken)
     rutinas = Rutina.find_all_by_eliminada_and_usuario_email(false, securityToken.emailUsuario)
     ret_ejercicios_dto = Array.new(get_cantidad_ejercicio_de_usuario(securityToken.emailUsuario))
+    index = 0
     rutinas.each do |rutina|
       ejercicios = Ejercicio.find_all_by_eliminada_and_rutina_id(false, rutina.id)
       assembler = EjercicioAssembler.new
-      index = 0
       ejercicios.each do |ejercicio|
         rutina = Rutina.find_by_id_and_usuario_email(ejercicio.rutina.id, securityToken.emailUsuario)
         if(rutina != nil)
