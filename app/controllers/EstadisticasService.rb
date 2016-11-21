@@ -86,7 +86,7 @@ get :estadisticaPasos, :map => '/pasos' do
     if false
       get_error_response(404,"Usuario no autorizado.")
     else
-      rutinas = Rutina.find_all_by_eliminada_and_usuario_email(false, securityToken.emailUsuario)
+      rutinas = Rutina.find_all_by_eliminada_and_esDeCarga_and_usuario_email(false, true, securityToken.emailUsuario)
       count = get_cantidad_rutinas_con_ejercicios_con_marcas(securityToken)
       ret_estadisticas_marcas = Array.new(count)
       assembler = MarcaAssembler.new

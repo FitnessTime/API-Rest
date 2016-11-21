@@ -117,7 +117,7 @@ FitnessTimeApi::App.helpers do
  
   def get_cantidad_rutinas_con_ejercicios_con_marcas(securityToken)
     count = 0
-    rutinas = Rutina.find_all_by_eliminada_and_usuario_email(false, securityToken.emailUsuario)
+    rutinas = Rutina.find_all_by_eliminada_and_esDeCarga_and_usuario_email(false, true, securityToken.emailUsuario)
     rutinas.each do |rutinaCount|
       tieneEjerciciosConMarcas = false
       rutinaCount.ejercicios.each do |ejercicioCount|
