@@ -23,6 +23,7 @@ class EjercicioAssembler
             ejercicioDTO.repeticiones = nil 
             ejercicioDTO.tiempoActivo = ejercicio.tiempoActivo
             ejercicioDTO.tiempoDescanso = ejercicio.tiempoDescanso
+            ejercicioDTO.marcasDTO = nil
         end
         ejercicioDTO.idWeb = ejercicio.id
        	ejercicioDTO.idMobile = ejercicio.idMobile
