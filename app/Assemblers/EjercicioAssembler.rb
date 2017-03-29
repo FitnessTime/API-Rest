@@ -9,10 +9,11 @@ class EjercicioAssembler
             ejercicioDTO.repeticiones = ejercicio.repeticiones 
             ejercicioDTO.tiempoActivo = nil
             ejercicioDTO.tiempoDescanso = nil
-            marcasDto = Array.new(ejercicioPadre.marcas.size)
+            marcas = Marca.find_by_ejercicio_id(ejercicioPadre.id)
+            marcasDto = Array.new(marcas.size)
             assembler = MarcaAssembler.new
             index = 0
-            ejercicioPadre.marcas.each do |marca|
+            marcas.each do |marca|
                 marcasDto[index] = assembler.crear_dto(marca)
                 index = index + 1
             end
