@@ -35,7 +35,7 @@ gem 'json'
 gem 'clockwork'
 gem 'twitter'
 gem 'mail', '~> 2.5', '>= 2.5.4'
-#gem 'dm-postgres-adapter'
+gem 'dm-postgres-adapter'
 
 # Test requirements
 group :staging, :production do
