@@ -16,8 +16,9 @@ module FitnessTimeApi
       :port                 => 587,
       :user_name            => 'fitnesstimeapplication@gmail.com',
       :password             => '4demarzo',
-      :authentication       => :plain,
-      :enable_starttls_auto => false
+      :authentication       => "plain",
+      :enable_starttls_auto => true,
+      :openssl_verify_mode  => OpenSSL::SSL::VERIFY_NONE
     }
     ##
     # Caching support
