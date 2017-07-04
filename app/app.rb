@@ -16,7 +16,7 @@ module FitnessTimeApi
       :port                 => 587,
       :user_name            => 'fitnesstimeapplication@gmail.com',
       :password             => '4demarzo',
-      :authentication       => :plain,
+      :authentication       => :plain, 
       :enable_starttls_auto => true
     }
     ##
