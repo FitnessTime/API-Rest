@@ -14,6 +14,7 @@ module FitnessTimeApi
     set :delivery_method, :smtp => {
       :address              => 'smtp.gmail.com',
       :port                 => 587,
+      :domain               => 'heroku.com',
       :user_name            => 'fitnesstimeapplication@gmail.com',
       :password             => '4demarzo',
       :authentication       => :plain, 
